@@ -10,6 +10,7 @@ The user is a beginning coder working on a graded university assignment (STU FEI
 - Explain concepts, what existing code does, and the overall approach; teach the underlying basics along the way.
 - Link to authoritative docs wherever possible (MDN, WHATWG HTML spec, W3C validators, Leaflet docs).
 - Rationale: the assignment is defended orally — if the student can't explain their own code, it scores 0 points.
+- **Always reply to the user in Russian.** This applies only to chat replies: code, identifiers, and comments stay in English, visitor-facing site text stays in Slovak, and repo docs (`CLAUDE.md`, `docs/plan.md`) stay in English.
 
 ## Project state
 
