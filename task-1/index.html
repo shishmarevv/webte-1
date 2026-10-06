@@ -9,6 +9,10 @@
                 <meta property="og:title" content="Viktor Shishmarev - Профиль">
                 <meta property="og:description" content="Визитка. Студент прикладной информатики FEI STU. Data Engineer в Dell Technologies. Люблю кошек.">
 
+                <link rel="stylesheet" href="css/styles.css">
+
+                <script defer src="js/script.js"></script>
+
                 <title>Viktor Shishmarev - Профиль</title>
         </head>
         <body>
@@ -21,9 +25,9 @@
                                 <span>
                                         VS
                                 </span>
-                                <p>
+                                <span>
                                         Viktor Shishmarev
-                                </p>
+                                </span>
                         </a>
                         <p>
                                 Открыт новым идеям и росту
@@ -31,7 +35,12 @@
                 </header>
 
                 <nav>
-                        <ul>
+                        <button type="button" hidden aria-expanded="false" aria-controls="navigation" aria-label="меню">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">                                                        
+                                        <path d="M5 17H13M5 12H19M11 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                        </button>
+                        <ul id="navigation">
                                 <li>
                                         <a href="index.html" aria-current="page">
                                                 Обо мне
@@ -80,11 +89,22 @@
                                 <a href="mailto:viktor.shishmarev@example.com">
                                         viktor.shishmarev@example.com
                                 </a>
-                                <p></p>
-                                <a href="tel: +421967676767">
+                                <a href="tel:+421967676767">
                                          +421 9xx xxx xxx
                                 </a>
                         </address>
+                        <ul id="sources">
+                                <li>
+                                        <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">
+                                                Шрифт JetBrains Mono
+                                        </a>  
+                                </li>
+                                <li>
+                                        <a href="https://www.svgrepo.com/svg/511068/menu-alt-05" target="_blank" rel="noopener">
+                                                Иконка меню, SVG Repo
+                                        </a>
+                                </li>
+                        </ul>
                         <p>
                                 © 2026 Viktor Shishmarev
                         </p>

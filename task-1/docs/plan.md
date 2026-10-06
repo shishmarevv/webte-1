@@ -79,7 +79,14 @@ Rules: pastel colours are never used for text. On soft-green fills, use only the
 - Terminal details: prompt line / cursor motif; animation off under `prefers-reduced-motion`
 - Custom 404 page in the same design (check whether the school server lets you set it, e.g. via `.htaccess`)
 
-**Still to decide:** spacing scale (`--space` steps), `--radius` value, type scale for headings, container max-width, focus-ring style (shared by links, buttons, hotspots), transition durations.
+**Layout tokens** (start values, tune while building):
+- Spacing: base `--space` = `1rem` plus three derived steps (multiples of the base via `calc()`; which multiples: TBD).
+- Radius: minimal `--radius` (a few px) — stricter look than the "soft" style above; the terminal details lead.
+- Container: one `max-width` for every page (uniform, strict look); the schedule table scrolls horizontally inside it on narrow screens.
+- Font: three JetBrains Mono `.woff2` files (which weights/styles: TBD).
+- Focus ring: solid, thick, no offset, deep pink; same on links, buttons, filters, hotspots. Measured contrast of the ring against every fill it can touch is ≥ 3:1 in both themes (lowest: 4.15 on light soft green). Watch for parents with `overflow: hidden` clipping it.
+
+**Still to decide:** the three derived spacing steps, container width value, which three font files, heading sizes, ring thickness, transition durations.
 
 ## Shared frame (every page)
 
