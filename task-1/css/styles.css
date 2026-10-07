@@ -121,7 +121,7 @@ nav a {
         text-decoration: none;
 }
 
-nav a[aria-current="page"]{
+nav a[aria-current="page"], nav a[aria-current="page"]:hover{
         background-color: var(--color-brand-green);
         color: var(--color-text);
 }
@@ -135,6 +135,12 @@ nav button{
         background-color: var(--color-background);
         color: var(--color-muted-text);
         display: none;
+}
+
+@media(any-hover: hover){
+        nav a:hover, nav button:hover{
+                background-color: var(--color-surface);
+        }   
 }
 
 @media(max-width: 768px){
