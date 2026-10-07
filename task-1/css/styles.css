@@ -1,0 +1,76 @@
+:root {
+        --color-background:  #FAF6EE;
+        --color-surface: #F0E9DA;
+        --color-brand-green: #B9D3B0;
+        --color-brand-pink: #F3CCD3;
+        --color-text: #2B2A27;
+        --color-muted-text: #5E5A52;
+        --color-link: #2F5D3A;
+        --color-accent: #9A3B55;
+
+        --space: 1rem;
+        --space-s: calc(0.5 * var(--space));
+        --space-l: calc(2 * var(--space));
+        --space-xl: calc(4 * var(--space));
+
+        --radius: 3px;
+
+        color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark){
+        :root {
+                --color-background:  #1B1E1A;
+                --color-surface: #252A24;
+                --color-brand-green: #3E5A40;
+                --color-brand-pink: #5A3440;
+                --color-text: #EFE9DC;
+                --color-muted-text: #B8B1A3;
+                --color-link: #A9CCA0;
+                --color-accent: #F0B3C1;
+        }
+}
+
+@font-face{
+        font-family: 'JetBrains Mono';
+        src: 
+                url('../fonts/JetBrainsMono-Regular.woff2')
+                format("woff2");
+        font-weight: 400;
+        font-display: swap;
+}
+
+@font-face{
+        font-family: 'JetBrains Mono';
+        src: 
+                url('../fonts/JetBrainsMono-SemiBold.woff2')
+                format("woff2");
+        font-weight: 600;
+        font-display: swap;
+}
+
+@font-face{
+        font-family: 'JetBrains Mono';
+        src: 
+                url('../fonts/JetBrainsMono-Bold.woff2')
+                format("woff2");
+        font-weight: 700;
+        font-display: swap;
+}
+
+*, *::before, *::after {
+        box-sizing: border-box;
+}
+
+body {
+        background-color: var(--color-background);
+        color: var(--color-text);
+        font-family: 'JetBrains Mono', monospace;
+        max-width: 100ch;
+        margin-inline: auto;
+        padding-inline: var(--space-l);
+}
+
+a {
+        color: var(--color-link);
+}
