@@ -80,13 +80,13 @@ Rules: pastel colours are never used for text. On soft-green fills, use only the
 - Custom 404 page in the same design (check whether the school server lets you set it, e.g. via `.htaccess`)
 
 **Layout tokens** (start values, tune while building):
-- Spacing: base `--space` = `1rem` plus three derived steps (multiples of the base via `calc()`; which multiples: TBD).
+- Spacing: base `--space` = `1rem` plus three derived steps: ×0.5, ×2, ×4 (computed from the base via `calc()`).
 - Radius: minimal `--radius` (a few px) — stricter look than the "soft" style above; the terminal details lead.
-- Container: one `max-width` for every page (uniform, strict look); the schedule table scrolls horizontally inside it on narrow screens.
-- Font: three JetBrains Mono `.woff2` files (which weights/styles: TBD).
-- Focus ring: solid, thick, no offset, deep pink; same on links, buttons, filters, hotspots. Measured contrast of the ring against every fill it can touch is ≥ 3:1 in both themes (lowest: 4.15 on light soft green). Watch for parents with `overflow: hidden` clipping it.
+- Container: one `max-width` of `100ch` for every page (uniform, strict look); the schedule table scrolls horizontally inside it on narrow screens.
+- Font: three JetBrains Mono `.woff2` files: 400, 600, 700, no italic (the `<aside>` quote is emphasised by size/colour/border instead).
+- Focus ring: solid, 3px, no offset, deep pink; same on links, buttons, filters, hotspots. Measured contrast of the ring against every fill it can touch is ≥ 3:1 in both themes (lowest: 4.15 on light soft green). Watch for parents with `overflow: hidden` clipping it.
 
-**Still to decide:** the three derived spacing steps, container width value, which three font files, heading sizes, ring thickness, transition durations.
+**Still to decide:** heading sizes (which weight goes where: 600 vs 700), transition durations.
 
 ## Shared frame (every page)
 
