@@ -87,7 +87,7 @@ header a {
         text-decoration: none;
 }
 
-nav ul {
+nav ul, .sources {
         list-style: none;
         margin: 0;
         padding: 0;
@@ -132,4 +132,38 @@ nav button{
                 margin-top: var(--space-s);
                 flex-direction: column;
         }
+}
+
+.skip-link{
+        position: absolute;
+        top: 0;
+        transform: translateY(-100%);
+        background-color: var(--color-surface);
+        color: var(--color-text);
+        padding: var(--space-s) var(--space);
+        border-radius: var(--radius);
+}
+
+.skip-link:focus{
+        transform: none;
+}
+
+a:focus-visible, button:focus-visible {
+        outline:
+                3px
+                solid
+                var(--color-accent);
+        outline-offset: 0;
+}
+
+address {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+        font-style: normal;
+        text-decoration: none;
+}
+
+.sources {
+        text-decoration: none;
 }
