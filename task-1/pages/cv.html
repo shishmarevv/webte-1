@@ -78,17 +78,201 @@
 
                 <main id="main-content">
                         <h1>
-                                Резюме
+                                Viktor Shishmarev
                         </h1>
 
-                        <section>
-                                <h2>
-                                        Мой профессиональный опыт
-                                </h2>
-                                <p>
-                                        Я Data Engineer в Dell Technologies. Учусь на прикладной информатике FEI STU.
-                                </p>
-                        </section>
+                        <div class="cv-container">
+                                <div class="cv-profile">
+                                       <section>
+                                               <h2>
+                                                       Контакты
+                                               </h2>
+                                               <img src="../img/pfp.jpg" alt="Виктор стоит прислонившись к стене, скрестив руки на груди" width="512" height="512">
+                                               <address>
+                                                       <a href="mailto:viktor.shishmarev@example.com">
+                                                               viktor.shishmarev@example.com
+                                                       </a>
+                                                       <a href="tel:+421967676767">
+                                                                +421 9xx xxx xxx
+                                                       </a>    
+                                               </address>
+                                       </section>
+                                </div>
+                                <div class="cv-info">
+                                        <section>
+                                                <h2>
+                                                        Опыт
+                                                </h2>
+
+                                                <div>
+                                                        <h3>
+                                                                Data Engineering Intern
+                                                        </h3>
+                                                        <p>
+                                                                Dell Technologies, <time datetime="2026-02">февраль 2026</time> – по настоящее время
+                                                        </p>
+                                                        <ul>
+                                                                <li>
+                                                                        Строю и поддерживаю пайплайны в Apache Airflow, которые загружают, преобразуют и проверяют данные для аналитики и ML-экспериментов.
+                                                                </li>
+                                                                <li>
+                                                                        Пишу SQL-трансформации в Greenplum и встраиваю в пайплайны проверки качества данных и логирование.
+                                                                </li>
+                                                                <li>
+                                                                        Сравниваю ответы генеративных моделей на разных промптах и наборах данных с помощью метрик качества и анализа ошибок.
+                                                                </li>
+                                                        </ul>
+                                                </div>
+                                                <div>
+                                                        <h3>
+                                                                Fullstack Web Developer
+                                                        </h3>
+                                                        <p>
+                                                                Цифровое агентство Artrix, <time datetime="2024-07">июль 2024</time> – <time datetime="2025-10">октябрь 2025</time>
+                                                        </p>
+                                                        <ul>
+                                                                <li>
+                                                                        Исправил критические уязвимости на стороне сервера.
+                                                                </li>
+                                                                <li>
+                                                                        Стабилизировал интеграции CRM «Email Connector»: добавил повторные попытки, очередь и логирование отправки писем.
+                                                                </li>
+                                                                <li>
+                                                                        Поддерживал рабочие Linux-серверы.
+                                                                </li>
+                                                        </ul>
+                                                </div>
+                                        </section>
+                                        <section>
+                                                <h2>
+                                                        Образование
+                                                </h2>
+
+                                                <div>
+                                                        <h3>
+                                                                Fakulta elektrotechniky a informatiky STU v Bratislave
+                                                        </h3>
+                                                        <p>
+                                                                Прикладная информатика, бакалавриат, <time datetime="2024">2024</time> – <time datetime="2027">2027</time>
+                                                        </p>
+                                                </div>
+                                                <div>
+                                                        <h3>
+                                                                Курсы и сертификаты
+                                                        </h3>
+                                                        <ul>
+                                                                <li>
+                                                                        Летняя школа NLP, KInIT
+                                                                </li>
+                                                                <li>
+                                                                        Программа Dell STEM Aspire
+                                                                </li>
+                                                                <li>
+                                                                        Google AI Essentials
+                                                                </li>
+                                                                <li>
+                                                                        HackerRank: Python, SQL, Software Engineer Intern
+                                                                </li>
+                                                        </ul>
+                                                </div>
+                                        </section>
+                                        <section>
+                                                <h2>
+                                                        Навыки
+                                                </h2>
+
+                                                <div>
+                                                        <h3>
+                                                                Data Engineering
+                                                        </h3>
+                                                        <dl>
+                                                                <div>
+                                                                        <dt><label for="skill-python">Python</label></dt>
+                                                                        <dd><meter id="skill-python" min="1" max="6" value="6"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-airflow">Apache Airflow</label></dt>
+                                                                        <dd><meter id="skill-airflow" min="1" max="6" value="5"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-sql">SQL: PostgreSQL, Greenplum</label></dt>
+                                                                        <dd><meter id="skill-sql" min="1" max="6" value="5"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-data-quality">Качество данных</label></dt>
+                                                                        <dd><meter id="skill-data-quality" min="1" max="6" value="4"></meter></dd>
+                                                                </div>
+                                                        </dl>
+                                                </div>
+                                                <div>
+                                                        <h3>
+                                                                Машинное обучение
+                                                        </h3>
+                                                        <dl>
+                                                                <div>
+                                                                        <dt><label for="skill-llm">LLM и генеративный ИИ</label></dt>
+                                                                        <dd><meter id="skill-llm" min="1" max="6" value="4"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-pytorch">PyTorch</label></dt>
+                                                                        <dd><meter id="skill-pytorch" min="1" max="6" value="3"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-scikit-learn">scikit-learn</label></dt>
+                                                                        <dd><meter id="skill-scikit-learn" min="1" max="6" value="2"></meter></dd>
+                                                                </div>
+                                                        </dl>
+                                                </div>
+                                                <div>
+                                                        <h3>
+                                                                Веб-разработка
+                                                        </h3>
+                                                        <dl>
+                                                                <div>
+                                                                        <dt><label for="skill-php">PHP</label></dt>
+                                                                        <dd><meter id="skill-php" min="1" max="6" value="4"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-mysql">MySQL</label></dt>
+                                                                        <dd><meter id="skill-mysql" min="1" max="6" value="4"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-nginx">Nginx и Linux-серверы</label></dt>
+                                                                        <dd><meter id="skill-nginx" min="1" max="6" value="4"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-javascript">JavaScript</label></dt>
+                                                                        <dd><meter id="skill-javascript" min="1" max="6" value="3"></meter></dd>
+                                                                </div>
+                                                                <div>
+                                                                        <dt><label for="skill-elasticsearch">Elasticsearch</label></dt>
+                                                                        <dd><meter id="skill-elasticsearch" min="1" max="6" value="1"></meter></dd>
+                                                                </div>
+                                                        </dl>
+                                                </div>
+                                        </section>
+                                        <section>
+                                                <h2>
+                                                        Языки
+                                                </h2>
+
+                                                <dl>
+                                                        <div>
+                                                                <dt><label for="language-russian">Русский</label></dt>
+                                                                <dd><meter id="language-russian" min="1" max="6" value="6"></meter> C2</dd>
+                                                        </div>
+                                                        <div>
+                                                                <dt><label for="language-english">Английский</label></dt>
+                                                                <dd><meter id="language-english" min="1" max="6" value="5"></meter> C1</dd>
+                                                        </div>
+                                                        <div>
+                                                                <dt><label for="language-slovak">Словацкий</label></dt>
+                                                                <dd><meter id="language-slovak" min="1" max="6" value="4"></meter> B2</dd>
+                                                        </div>
+                                                </dl>
+                                        </section>
+                                </div>
+                        </div>
                 </main>
 
                 <footer>
