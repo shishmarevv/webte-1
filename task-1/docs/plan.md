@@ -45,6 +45,8 @@ Pages in `pages/` link to assets and to each other using relative paths (`../css
 | Schedule table | Static HTML with `colspan` / `rowspan` and data attributes (day, time, type); JS only reads it to highlight the current class and filter | Validates, works without JS |
 | Leaflet | Local copy in `vendor/leaflet/` | No external dependencies (same spirit as the font rule) |
 | Naming map points | Labelled form next to the map; clicking the map fills the coordinates | Accessible, stylable, consistent with the site |
+| Three key things | 1) Data pipelines (Python, Apache Airflow); 2) Machine learning & generative AI (PyTorch, LLMs); 3) SQL & data quality (PostgreSQL, Greenplum). Profile focus: data/ML engineering; Linux/web only as background | Each is backed by the resume (Dell internship, projects); must reappear as CV skills with levels and as ≥1 workspace hotspot |
+| Motto (`<aside>`) | "Talk is cheap. Show me the code." (Linus Torvalds), quote in `<blockquote lang="en">`, attribution outside it | Student's choice |
 | Tone | Formal (vykanie), first person, Slovak, with light humour; jokes must still be true and the tone consistent on all pages | Chosen for the whole site; spec bans made-up filler and wants one tone |
 | Placeholders | Allowed on the `task-1` branch during development; **all** placeholder text (e.g. "Здесь будет …", fake `9xx` digits) must be replaced before merging into `main` | Spec bans filler/TODO in the submitted site |
 | Content language during development | Visitor-facing text is written in **Russian** first and translated to Slovak (with diacritics) before submission; `lang` is `ru` until then | Student can't type Slovak yet. **Before submission:** translate all text, `<title>`, meta/OG descriptions, alt texts, JS messages, and switch `lang` to `sk` |
@@ -109,7 +111,7 @@ Rules: pastel colours are never used for text. On soft-green fills, use only the
 ## Open questions
 
 - Workspace image topic → decide when implementing that page.
-- Personal data used consistently everywhere: school (map = CV), study program (= schedule subjects), contact (footer = CV), home location, the **three key things**.
+- Personal data used consistently everywhere: school (map = CV), study program (= schedule subjects), contact (footer = CV), home location (three key things: decided, see Decisions).
 - Semester dates for `SEMESTER_START` / `SEMESTER_END`.
 - School server URL — needed for the absolute `og:image` URL on every page (postponed until images exist).
 - Map + keyboard: clicking the map is mouse/touch only — how will a keyboard user add a point (e.g. map centre, or typed coordinates)?
