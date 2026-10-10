@@ -51,9 +51,9 @@ if (scheduleFilter) {
         const now = new Date();
         const nowInWeek = now.getDay() * 1440 + now.getHours() * 60 + now.getMinutes();
         if (now < SEMESTER_START) {
-                scheduleStatus.textContent = "Семестр ещё не начался";
+                scheduleStatus.textContent = "Semester ešte nezačal";
         } else if (now > SEMESTER_END) {
-                scheduleStatus.textContent = "Семестр уже закончился";
+                scheduleStatus.textContent = "Semester sa už skončil";
         } else {
                 let currentItem = null;
                 let nextItem = null;
@@ -77,12 +77,12 @@ if (scheduleFilter) {
                 if (currentItem) {
                         currentItem.classList.add('is-current');
                         currentItem.setAttribute('aria-current', 'time');
-                        scheduleStatus.textContent = 'Сейчас идёт: ' + currentItem.querySelector('abbr').title;
+                        scheduleStatus.textContent = 'Práve prebieha: ' + currentItem.querySelector('abbr').title;
                 } else {
-                        scheduleStatus.textContent = 'Следующее: ' +
+                        scheduleStatus.textContent = 'Najbližšia hodina: ' +
                                 nextItem.querySelector('abbr').title +
                                 ', ' +
-                                nextItem.closest('tr').querySelector('abbr').title +
+                                nextItem.closest('tr').querySelector('abbr').title.toLowerCase() +
                                 ' ' +
                                 nextItem.dataset.start;
                 }

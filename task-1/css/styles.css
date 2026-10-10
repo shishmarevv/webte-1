@@ -121,14 +121,14 @@ nav ul, .sources, .schedule-filter {
         gap: var(--space-s);
 }
 
-nav a, .schedule-filter button {
+nav a, .schedule-filter button, .map-panel button {
         display: block;
         padding: var(--space-s) var(--space);
         border-radius: var(--radius);
         text-decoration: none;
 }
 
-nav a[aria-current="page"], nav a[aria-current="page"]:hover, .schedule-filter button[aria-pressed="true"]{
+nav a[aria-current="page"], nav a[aria-current="page"]:hover, .schedule-filter button[aria-pressed="true"], .map-points button[aria-pressed="true"]{
         background-color: var(--color-brand-green);
         color: var(--color-text);
 }
@@ -145,7 +145,7 @@ nav button{
 }
 
 @media(any-hover: hover){
-        nav a:hover, nav button:hover, .schedule-filter button:hover{
+        nav a:hover, nav button:hover, .schedule-filter button:hover, .map-panel button:hover{
                 background-color: var(--color-surface);
         }   
 }
@@ -179,7 +179,7 @@ nav button{
         transform: none;
 }
 
-a:focus-visible, button:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, .map:focus-visible {
         outline:
                 3px
                 solid
@@ -427,12 +427,15 @@ footer address, footer .sources {
         margin: 0;
 }
 
-.schedule-filter button{
+.schedule-filter button, .map-panel button{
         font: inherit;
         background: none;
         color: var(--color-link);
         border: none;
         cursor: pointer;
+}
+
+.schedule-filter button{
         flex: 1;
 }
 
@@ -460,4 +463,329 @@ footer address, footer .sources {
 
 .semester progress::-moz-progress-bar {
         background: var(--color-accent);
+}
+
+.map-container {
+        display: flex;
+        gap: var(--space-l);
+}
+
+.map-section {
+        flex: 2;
+        min-width: 0;
+}
+
+.map-panel {
+        flex: 1;
+}
+
+.map {
+        height: 60vh;
+        min-height: 20rem;
+        border-radius: var(--radius);
+        font-family: inherit;
+}
+
+.map .leaflet-popup-content p {
+        margin: 0;
+}
+
+/* Crosshair for keyboard users: the point that Enter or the map centre button will mark */
+.map:focus-visible::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1000;
+        width: 1.5rem;
+        height: 1.5rem;
+        transform: translate(-50%, -50%);
+        border:
+                3px
+                solid
+                var(--color-accent);
+        border-radius: 50%;
+        pointer-events: none;
+}
+
+.map .map-marker {
+        border:
+                2px
+                solid
+                var(--color-link);
+        border-radius: var(--radius);
+        background-color: var(--color-brand-green);
+}
+
+.map .map-marker-place {
+        border-color: var(--color-muted-text);
+        background-color: var(--color-surface);
+}
+
+.map .map-marker-point {
+        border-color: var(--color-accent);
+        border-radius: 50%;
+        background-color: var(--color-brand-pink);
+}
+
+.map .map-marker-point.is-selected {
+        background-color: var(--color-accent);
+}
+
+.map .map-marker-pending {
+        border:
+                2px
+                dashed
+                var(--color-text);
+        border-radius: 50%;
+        background: none;
+}
+
+.map .leaflet-tooltip, .map .leaflet-popup-content-wrapper, .map .leaflet-popup-tip,
+.map .leaflet-bar a, .map .leaflet-control-attribution {
+        background-color: var(--color-background);
+        color: var(--color-text);
+}
+
+.map .leaflet-tooltip {
+        border:
+                1px
+                solid
+                var(--color-muted-text);
+        border-radius: var(--radius);
+        box-shadow: none;
+}
+
+.map .leaflet-tooltip-top::before {
+        border-top-color: var(--color-muted-text);
+}
+
+.map .leaflet-popup-content-wrapper {
+        border-radius: var(--radius);
+}
+
+.map a.leaflet-popup-close-button, .map a.leaflet-popup-close-button:hover, .map .leaflet-control-attribution a {
+        color: var(--color-link);
+}
+
+@media(any-hover: hover){
+        .map .leaflet-bar a:hover {
+                background-color: var(--color-surface);
+        }
+}
+
+@media screen and (prefers-color-scheme: dark){
+        .map .leaflet-tile-pane {
+                filter: brightness(0.7);
+        }
+}
+
+.map-form label {
+        display: block;
+}
+
+.map-form input {
+        width: 100%;
+        font: inherit;
+        color: var(--color-text);
+        background-color: var(--color-background);
+        border:
+                1px
+                solid
+                var(--color-muted-text);
+        border-radius: var(--radius);
+        padding: var(--space-xs) var(--space-s);
+}
+
+.map-form-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+}
+
+.map-form-error, .map-storage-error {
+        color: var(--color-accent);
+}
+
+.map-points {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+}
+
+.map-points li {
+        display: flex;
+        gap: var(--space-s);
+}
+
+.map-points .map-point-select {
+        flex: 1;
+        text-align: left;
+        overflow-wrap: anywhere;
+}
+
+@media(max-width: 768px){
+        .map-container {
+                flex-direction: column;
+                gap: 0;
+        }
+
+        .map {
+                height: 50vh;
+        }
+}
+
+/* Grid area "image" is the containing block for hotspots, so their % are of the photo only */
+.workspace-image {
+        position: relative;
+        display: grid;
+        grid-template-areas: "image";
+}
+
+.workspace-image img {
+        grid-area: image;
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius);
+}
+
+/* The wrapper has no box of its own: button and panel are laid out as grid items */
+.hotspot {
+        display: contents;
+}
+
+.hotspot-button {
+        position: absolute;
+        grid-area: image;
+        left: var(--x);
+        top: var(--y);
+        width: var(--w);
+        height: var(--h);
+        padding: 0;
+        border: none;
+        border-radius: var(--radius);
+        background: none;
+        cursor: pointer;
+}
+
+/* The dot makes every hotspot obviously clickable; same look as the school/home map markers */
+.hotspot-button::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1.25rem;
+        height: 1.25rem;
+        transform: translate(-50%, -50%);
+        border:
+                2px
+                solid
+                var(--color-link);
+        border-radius: var(--radius);
+        background-color: var(--color-brand-green);
+        box-shadow:
+                0 0 0
+                2px
+                var(--color-background);
+}
+
+/* Two rings, light and dark, so the frame is visible on any part of the photo */
+.hotspot-button:focus-visible {
+        box-shadow:
+                inset 0 0 0 2px var(--color-background),
+                inset 0 0 0 4px var(--color-text);
+}
+
+@media(any-hover: hover){
+        .hotspot-button:hover {
+                box-shadow:
+                        inset 0 0 0 2px var(--color-background),
+                        inset 0 0 0 4px var(--color-text);
+        }
+}
+
+.hotspot-panel {
+        position: absolute;
+        grid-area: image;
+        left: var(--x);
+        top: calc(var(--y) + var(--h));
+        width: min(18rem, 100%);
+        padding: var(--space-s) var(--space);
+        border-left:
+                3px
+                solid
+                var(--color-accent);
+        border-radius: var(--radius);
+        background-color: var(--color-surface);
+        opacity: 0;
+        visibility: hidden;
+}
+
+.hotspot-end .hotspot-panel {
+        left: auto;
+        right: calc(100% - var(--x) - var(--w));
+}
+
+.hotspot-up .hotspot-panel {
+        top: auto;
+        bottom: calc(100% - var(--y));
+}
+
+.hotspot-panel h3 {
+        margin: 0;
+        font-size: 1rem;
+}
+
+.hotspot-panel p {
+        margin: var(--space-xs) 0 0;
+}
+
+.hotspot:hover .hotspot-panel, .hotspot:focus-within .hotspot-panel {
+        z-index: 1;
+        opacity: 1;
+        visibility: visible;
+}
+
+/* Exactly one panel: the hovered hotspot wins over another one that still has focus */
+.workspace-image:has(.hotspot:hover) .hotspot:not(:hover) .hotspot-panel {
+        opacity: 0;
+        visibility: hidden;
+}
+
+@media(prefers-reduced-motion: no-preference){
+        .hotspot-panel {
+                transition:
+                        opacity 0.2s,
+                        visibility 0.2s;
+        }
+}
+
+/* Small screens: all panels are stacked in one grid cell under the photo.
+   Hidden panels still take space, so the cell is as tall as the longest text and nothing jumps */
+@media(max-width: 768px){
+        .workspace-image {
+                grid-template-areas:
+                        "image"
+                        "panel";
+        }
+
+        .hotspot-panel, .hotspot-end .hotspot-panel, .hotspot-up .hotspot-panel {
+                position: static;
+                grid-area: panel;
+                width: auto;
+                margin-top: var(--space-s);
+        }
+
+        /* Until the visitor picks something, the first hotspot is shown */
+        .workspace-image:not(:has(.hotspot:hover, .hotspot:focus-within)) .hotspot:first-of-type .hotspot-panel {
+                opacity: 1;
+                visibility: visible;
+        }
+
+        .workspace-image:not(:has(.hotspot:hover, .hotspot:focus-within)) .hotspot:first-of-type .hotspot-button {
+                box-shadow:
+                        inset 0 0 0 2px var(--color-background),
+                        inset 0 0 0 4px var(--color-text);
+        }
 }

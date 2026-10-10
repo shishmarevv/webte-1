@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="sk">
         <head>
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta name="description" content="График. В свободное время я открыт к диалогу.">
+                <meta name="description" content="Rozvrh. Vo voľnom čase som otvorený rozhovoru.">
 
-                <meta property="og:title" content="Viktor Shishmarev - Когда я свободен">
-                <meta property="og:description" content="График. В свободное время я открыт к диалогу.">
+                <meta property="og:title" content="Viktor Shishmarev - Kedy mám čas">
+                <meta property="og:description" content="Rozvrh. Vo voľnom čase som otvorený rozhovoru.">
                 <meta property="og:image" content="https://webte1.fei.stuba.sk/~xshishmarev/task-1/img/og-image.png">
 
                 <link rel="stylesheet" href="../css/styles.css">
@@ -17,11 +17,11 @@
 
                 <script defer src="../js/script.js"></script>
 
-                <title>Viktor Shishmarev - Когда я свободен</title>
+                <title>Viktor Shishmarev - Kedy mám čas</title>
         </head>
         <body>
                 <a class="skip-link" href="#main-content">
-                        Перейти к содержимому
+                        Preskočiť na obsah
                 </a>
 
                 <header>
@@ -36,12 +36,12 @@
                                 </span>
                         </a>
                         <p>
-                                Открыт новым идеям и росту
+                                Otvorený novým nápadom a rastu
                         </p>
                 </header>
 
                 <nav>
-                        <button id="hamburger" type="button" hidden aria-expanded="false" aria-controls="navigation" aria-label="меню">
+                        <button id="hamburger" type="button" hidden aria-expanded="false" aria-controls="navigation" aria-label="Menu">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">                                                        
                                         <path d="M5 17H13M5 12H19M11 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -49,27 +49,27 @@
                         <ul id="navigation">
                                 <li>
                                         <a href="../index.html">
-                                                Обо мне
+                                                O mne
                                         </a>
                                 </li>
                                 <li>
                                         <a href="cv.html">
-                                                Резюме
+                                                Životopis
                                         </a>
                                 </li>
                                 <li>
                                         <a href="schedule.html" aria-current="page">
-                                                Мой график
+                                                Môj rozvrh
                                         </a>
                                 </li>
                                 <li>
                                         <a href="workspace.html">
-                                                Моё рабочее место
+                                                Moje pracovisko
                                         </a>
                                 </li>
                                 <li>
                                         <a href="map.html">
-                                                Где меня найти
+                                                Kde ma nájdete
                                         </a>
                                 </li>
                         </ul>
@@ -77,21 +77,21 @@
 
                 <main id="main-content">
                         <h1>
-                                Мой график
+                                Môj rozvrh
                         </h1>
 
                         <section>
                                 <div class="schedule-head">
                                         <h2>
-                                                Зимний семестр 2026/2027
+                                                Zimný semester 2026/2027
                                         </h2>
-                                        <div class="schedule-filter" role="group" aria-label="Фильтр по типу" hidden>
-                                                <button type="button" data-filter="all" aria-pressed="true">Все</button>
-                                                <button type="button" data-filter="lecture" aria-pressed="false">Лекции</button>
-                                                <button type="button" data-filter="exercise" aria-pressed="false">Упражнения</button>
+                                        <div class="schedule-filter" role="group" aria-label="Filter podľa typu" hidden>
+                                                <button type="button" data-filter="all" aria-pressed="true">Všetko</button>
+                                                <button type="button" data-filter="lecture" aria-pressed="false">Prednášky</button>
+                                                <button type="button" data-filter="exercise" aria-pressed="false">Cvičenia</button>
                                         </div>
                                 </div>
-                                <p class="schedule-empty" hidden>Ничего не найдено</p>
+                                <p class="schedule-empty" hidden>Pre tento filter nemám žiadne hodiny.</p>
                                 <p class="schedule-status" hidden></p>
                                 <div class="schedule-table">
                                         <table>
@@ -116,88 +116,88 @@
                                                 </thead>
                                                 <tbody>
                                                         <tr>
-                                                                <th scope="row"><abbr title="Понедельник">Пн</abbr></th>
+                                                                <th scope="row"><abbr title="Pondelok">Po</abbr></th>
                                                                 <td rowspan="5" class="free"></td>
                                                                 <td class="free"></td>
                                                                 <td colspan="2" class="exercise" data-day="1" data-start="9:00" data-end="10:50">
                                                                         <abbr title="Operačné systémy">OS</abbr>
-                                                                        <small>упражнение</small>
+                                                                        <small>cvičenie</small>
                                                                 </td>
                                                                 <td colspan="2" class="exercise" data-day="1" data-start="11:00" data-end="12:50">
                                                                         <abbr title="Webové technológie 1">WEBTE1</abbr>
-                                                                        <small>упражнение</small>
+                                                                        <small>cvičenie</small>
                                                                 </td>
                                                                 <td colspan="2" class="free"></td>
                                                                 <td colspan="2" class="lecture" data-day="1" data-start="15:00" data-end="16:50">
                                                                         <abbr title="Lineárna algebra 2">LA2</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td class="free"></td>
                                                                 <td colspan="3" rowspan="5" class="free"></td>
                                                         </tr>
                                                         <tr>
-                                                                <th scope="row"><abbr title="Вторник">Вт</abbr></th>
+                                                                <th scope="row"><abbr title="Utorok">Ut</abbr></th>
                                                                 <td colspan="2" class="lecture" data-day="2" data-start="8:00" data-end="9:50">
                                                                         <abbr title="Analýza a zložitosť algoritmov">AZA</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td colspan="2" class="lecture" data-day="2" data-start="10:00" data-end="11:50">
                                                                         <abbr title="Webové technológie 1">WEBTE1</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td colspan="3" class="free"></td>
                                                                 <td colspan="2" class="lecture" data-day="2" data-start="15:00" data-end="16:50">
                                                                         <abbr title="Softvérové inžinierstvo">SWI</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td class="lecture" data-day="2" data-start="17:00" data-end="17:50">
                                                                         <abbr title="Softvérové inžinierstvo">SWI</abbr>
-                                                                        <small>семинар</small>
+                                                                        <small>seminár</small>
                                                                 </td>
                                                         </tr>
                                                         <tr>
-                                                                <th scope="row"><abbr title="Среда">Ср</abbr></th>
+                                                                <th scope="row"><abbr title="Streda">St</abbr></th>
                                                                 <td colspan="2" class="lecture" data-day="3" data-start="8:00" data-end="9:50">
                                                                         <abbr title="Operačné systémy">OS</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td colspan="2" class="lecture" data-day="3" data-start="10:00" data-end="11:50">
                                                                         <abbr title="Analýza a zložitosť algoritmov">AZA</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td class="free"></td>
                                                                 <td colspan="2" class="lecture" data-day="3" data-start="13:00" data-end="14:50">
                                                                         <abbr title="Webové technológie 1">WEBTE1</abbr>
-                                                                        <small>лекция</small>
+                                                                        <small>prednáška</small>
                                                                 </td>
                                                                 <td colspan="2" class="lecture" data-day="3" data-start="15:00" data-end="16:50">
                                                                         <abbr title="Bakalárska práca">BP</abbr>
-                                                                        <small>семинар</small>
+                                                                        <small>seminár</small>
                                                                 </td>
                                                                 <td class="free"></td>
                                                         </tr>
                                                         <tr>
-                                                                <th scope="row"><abbr title="Четверг">Чт</abbr></th>
+                                                                <th scope="row"><abbr title="Štvrtok">Št</abbr></th>
                                                                 <td rowspan="2" class="free"></td>
                                                                 <td colspan="2" class="exercise pe" data-day="4" data-start="9:00" data-end="10:50">
                                                                         <abbr title="Telesná kultúra">TK</abbr>
-                                                                        <small>физкультура</small>
+                                                                        <small>telesná kultúra</small>
                                                                 </td>
                                                                 <td class="exercise" data-day="4" data-start="11:00" data-end="11:50">
                                                                         <abbr title="Softvérové inžinierstvo">SWI</abbr>
-                                                                        <small>упражнение</small>
+                                                                        <small>cvičenie</small>
                                                                 </td>
                                                                 <td colspan="6" rowspan="2" class="free"></td>
                                                         </tr>
                                                         <tr>
-                                                                <th scope="row"><abbr title="Пятница">Пт</abbr></th>
+                                                                <th scope="row"><abbr title="Piatok">Pi</abbr></th>
                                                                 <td class="exercise" data-day="5" data-start="9:00" data-end="9:50">
                                                                         <abbr title="Analýza a zložitosť algoritmov">AZA</abbr>
-                                                                        <small>упражнение</small>
+                                                                        <small>cvičenie</small>
                                                                 </td>
                                                                 <td colspan="2" class="exercise" data-day="5" data-start="10:00" data-end="11:50">
                                                                         <abbr title="Lineárna algebra 2">LA2</abbr>
-                                                                        <small>упражнение</small>
+                                                                        <small>cvičenie</small>
                                                                 </td>
                                                         </tr>
                                                 </tbody>
@@ -205,7 +205,7 @@
                                 </div>
 
                                 <h3>
-                                        Сокращения
+                                        Skratky
                                 </h3>
                                 <dl class="schedule-legend">
                                         <div>
@@ -239,9 +239,9 @@
                                 </dl>
                         </section>
                         <section class="semester" hidden>
-                                <h2>Семестр</h2>
+                                <h2>Semester</h2>
                                 
-                                <label for="semester-progress">Прошло:</label>
+                                <label for="semester-progress">Uplynulo:</label>
                                 <progress id="semester-progress" max="100" value="0"></progress>
                                 <span class="semester-percent"></span>
                         </section>
@@ -266,14 +266,14 @@
                                 <li>
                                         <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">
                                                 <small>
-                                                        Шрифт JetBrains Mono
+                                                        Písmo JetBrains Mono
                                                 </small>
                                         </a>  
                                 </li>
                                 <li>
                                         <a href="https://www.svgrepo.com/svg/511068/menu-alt-05" target="_blank" rel="noopener">
                                                 <small>
-                                                        Иконка меню, SVG Repo
+                                                        Ikona menu, SVG Repo
                                                 </small>
                                         </a>
                                 </li>
