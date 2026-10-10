@@ -1,28 +1,30 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="sk">
         <head>
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta name="description" content="Мои любимые места - FEI STU, Dell Technologies, Зал, Бар Za Rohom">
+                <meta name="description" content="Moje obľúbené miesta - FEI STU, Dell Technologies, bar Za Rohom">
 
-                <meta property="og:title" content="Viktor Shishmarev - Где меня найти">
-                <meta property="og:description" content="Мои любимые места - FEI STU, Dell Technologies, Зал, Бар Za Rohom">
+                <meta property="og:title" content="Viktor Shishmarev - Kde ma nájdete">
+                <meta property="og:description" content="Moje obľúbené miesta - FEI STU, Dell Technologies, bar Za Rohom">
                 <meta property="og:image" content="https://webte1.fei.stuba.sk/~xshishmarev/task-1/img/og-image.png">
 
+                <link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
                 <link rel="stylesheet" href="../css/styles.css">
 
                 <link rel="icon" href="../favicon.ico" sizes="32x32">
                 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
         
                 <script defer src="../js/script.js"></script>
+                <script defer src="../vendor/leaflet/leaflet.js"></script>
                 <script defer src="../js/map.js"></script>
 
-                <title>Viktor Shishmarev - Где меня найти</title>
+                <title>Viktor Shishmarev - Kde ma nájdete</title>
         </head>
         <body>
                 <a class="skip-link" href="#main-content">
-                        Перейти к содержимому
+                        Preskočiť na obsah
                 </a>
 
                 <header>
@@ -37,12 +39,12 @@
                                 </span>
                         </a>
                         <p>
-                                Открыт новым идеям и росту
+                                Otvorený novým nápadom a rastu
                         </p>
                 </header>
 
                 <nav>
-                        <button id="hamburger" type="button" hidden aria-expanded="false" aria-controls="navigation" aria-label="меню">
+                        <button id="hamburger" type="button" hidden aria-expanded="false" aria-controls="navigation" aria-label="Menu">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">                                                        
                                         <path d="M5 17H13M5 12H19M11 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -50,27 +52,27 @@
                         <ul id="navigation">
                                 <li>
                                         <a href="../index.html">
-                                                Обо мне
+                                                O mne
                                         </a>
                                 </li>
                                 <li>
                                         <a href="cv.html">
-                                                Резюме
+                                                Životopis
                                         </a>
                                 </li>
                                 <li>
                                         <a href="schedule.html">
-                                                Мой график
+                                                Môj rozvrh
                                         </a>
                                 </li>
                                 <li>
                                         <a href="workspace.html">
-                                                Моё рабочее место
+                                                Moje pracovisko
                                         </a>
                                 </li>
                                 <li>
                                         <a href="map.html" aria-current="page">
-                                                Где меня найти
+                                                Kde ma nájdete
                                         </a>
                                 </li>
                         </ul>
@@ -78,17 +80,59 @@
 
                 <main id="main-content">
                         <h1>
-                                Где меня найти
+                                Kde ma nájdete
                         </h1>
 
-                        <section>
-                                <h2>
-                                        Карта
-                                </h2>
-                                <p>
-                                        Здесь будет карта
-                                </p>
-                        </section>
+                        <div class="map-container">
+                                <section class="map-section">
+                                        <h2>
+                                                Mapa
+                                        </h2>
+                                        <p>
+                                                Na mape sú označené miesta, kde trávim najviac času: fakulta, kancelária Dell, bar Za Rohom a domov (domov je označený len približne — v Petržalke).
+                                        </p>
+                                        <p class="map-error">
+                                                Mapa sa nenačítala. Potrebuje zapnutý JavaScript.
+                                        </p>
+                                        <div id="map" class="map" hidden></div>
+                                        <p class="map-hint" hidden>
+                                                Bez myši: vyberte mapu klávesom Tab, posúvajte ju šípkami, klávesy + a − menia priblíženie. Enter alebo tlačidlo „Stred mapy“ označí miesto pod krúžkom v strede mapy.
+                                        </p>
+                                </section>
+
+                                <section class="map-panel">
+                                        <h2>
+                                                Moje body
+                                        </h2>
+                                        <form class="map-form" hidden>
+                                                <label for="point-name">
+                                                        Názov bodu
+                                                </label>
+                                                <input id="point-name" type="text" required maxlength="40" autocomplete="off">
+                                                <p>
+                                                        Súradnice:
+                                                        <output class="map-coords">
+                                                                nevybrané
+                                                        </output>
+                                                </p>
+                                                <div class="map-form-buttons">
+                                                        <button type="button" class="map-center">Stred mapy</button>
+                                                        <button type="submit">Pridať</button>
+                                                </div>
+                                                <p class="map-form-error" hidden>
+                                                        Najprv vyberte miesto: kliknite na mapu alebo stlačte „Stred mapy“.
+                                                </p>
+                                        </form>
+                                        <p class="map-empty">
+                                                Zatiaľ tu nie je žiadny bod. Kliknite na mapu, vymyslite názov a stlačte „Pridať“ — vypočítam, ako ďaleko je to miesto od fakulty a od môjho domova.
+                                        </p>
+                                        <p class="map-storage-error" hidden>
+                                                Prehliadač nedovoľuje uložiť body, takže po obnovení stránky zmiznú.
+                                        </p>
+                                        <ul class="map-points"></ul>
+                                        <p class="map-info" aria-live="polite" hidden></p>
+                                </section>
+                        </div>
                 </main>
 
                 <footer>
@@ -110,14 +154,28 @@
                                 <li>
                                         <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">
                                                 <small>
-                                                        Шрифт JetBrains Mono
+                                                        Písmo JetBrains Mono
                                                 </small>
                                         </a>  
                                 </li>
                                 <li>
                                         <a href="https://www.svgrepo.com/svg/511068/menu-alt-05" target="_blank" rel="noopener">
                                                 <small>
-                                                        Иконка меню, SVG Repo
+                                                        Ikona menu, SVG Repo
+                                                </small>
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="https://leafletjs.com/" target="_blank" rel="noopener">
+                                                <small>
+                                                        Knižnica Leaflet
+                                                </small>
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">
+                                                <small>
+                                                        Mapa © OpenStreetMap
                                                 </small>
                                         </a>
                                 </li>
