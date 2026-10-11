@@ -20,7 +20,7 @@
         color-scheme: light dark;
 }
 
-@media screen and (prefers-color-scheme: dark){
+@media screen and (prefers-color-scheme: dark) {
         :root {
                 --color-background:  #1B1E1A;
                 --color-surface: #252A24;
@@ -34,37 +34,40 @@
         }
 }
 
-@font-face{
+@font-face {
         font-family: 'JetBrains Mono';
-        src: 
+        src:
                 url('../fonts/JetBrainsMono-Regular.woff2')
                 format("woff2");
         font-weight: 400;
         font-display: swap;
 }
 
-@font-face{
+@font-face {
         font-family: 'JetBrains Mono';
-        src: 
+        src:
                 url('../fonts/JetBrainsMono-SemiBold.woff2')
                 format("woff2");
         font-weight: 600;
         font-display: swap;
 }
 
-@font-face{
+@font-face {
         font-family: 'JetBrains Mono';
-        src: 
+        src:
                 url('../fonts/JetBrainsMono-Bold.woff2')
                 format("woff2");
         font-weight: 700;
         font-display: swap;
 }
 
+/* Base */
+
 *, *::before, *::after {
         box-sizing: border-box;
 }
 
+/* Otherwise a display rule from this file (e.g. display: flex) would win over the hidden attribute */
 [hidden] {
         display: none !important;
 }
@@ -83,6 +86,7 @@ body {
         line-height: 1.6;
 }
 
+/* body is a flex column and main takes the free space, so the footer stays at the bottom of short pages */
 main {
         flex: 1;
 }
@@ -90,6 +94,8 @@ main {
 a {
         color: var(--color-link);
 }
+
+/* Header, nav, footer */
 
 footer {
         border-top:
@@ -128,12 +134,12 @@ nav a, .schedule-filter button, .map-panel button {
         text-decoration: none;
 }
 
-nav a[aria-current="page"], nav a[aria-current="page"]:hover, .schedule-filter button[aria-pressed="true"], .map-points button[aria-pressed="true"]{
+nav a[aria-current="page"], nav a[aria-current="page"]:hover, .schedule-filter button[aria-pressed="true"], .map-points button[aria-pressed="true"] {
         background-color: var(--color-brand-green);
         color: var(--color-text);
 }
 
-nav button{
+nav button {
         padding: var(--space-s);
         border-radius: var(--radius);
         border: 1px
@@ -144,28 +150,30 @@ nav button{
         display: none;
 }
 
-@media(any-hover: hover){
-        nav a:hover, nav button:hover, .schedule-filter button:hover, .map-panel button:hover{
+/* Hover only on devices that can hover, so a tap on a phone does not leave the hover colour behind */
+@media (any-hover: hover) {
+        nav a:hover, nav button:hover, .schedule-filter button:hover, .map-panel button:hover {
                 background-color: var(--color-surface);
-        }   
+        }
 }
 
-@media(max-width: 768px){
-        nav button:not([hidden]){
+@media (max-width: 768px) {
+        nav button:not([hidden]) {
                 display: flex;
         }
 
-        nav button:not([hidden])[aria-expanded="false"] + ul{
+        /* The list is hidden only when the button (shown by JS) is collapsed; without JS the menu stays visible */
+        nav button:not([hidden])[aria-expanded="false"] + ul {
                 display: none;
         }
 
-        nav ul{
+        nav ul {
                 margin-top: var(--space-s);
                 flex-direction: column;
         }
 }
 
-.skip-link{
+.skip-link {
         position: absolute;
         top: 0;
         transform: translateY(-100%);
@@ -175,7 +183,7 @@ nav button{
         border-radius: var(--radius);
 }
 
-.skip-link:focus{
+.skip-link:focus {
         transform: none;
 }
 
@@ -199,6 +207,9 @@ footer address, footer .sources {
         justify-content: center;
 }
 
+/* Profile */
+
+/* flow-root makes the section contain the floated photo, so the next section does not wrap around it */
 .profile {
         display: flow-root;
 }
@@ -226,21 +237,21 @@ footer address, footer .sources {
         margin-left: auto;
 }
 
-.quote figure{
+.quote figure {
         margin: 0;
 }
 
-.quote blockquote{
+.quote blockquote {
         margin: 0;
         font-size: 1.25rem;
         font-weight: 600;
 }
 
-.quote blockquote::before{
+.quote blockquote::before {
         content: open-quote;
 }
 
-.quote blockquote::after{
+.quote blockquote::after {
         content: close-quote;
 }
 
@@ -249,16 +260,18 @@ footer address, footer .sources {
         margin-top: var(--space-s);
 }
 
-.quote figcaption::before{
+.quote figcaption::before {
         content: "— ";
 }
+
+/* CV */
 
 .cv-container {
         display: flex;
         gap: var(--space);
 }
 
-.cv-profile, .cv-info{
+.cv-profile, .cv-info {
         padding: var(--space-s);
         border-radius: var(--radius);
 }
@@ -281,7 +294,6 @@ footer address, footer .sources {
 }
 
 .cv-profile address {
-        display: flex;
         flex-direction: column;
 }
 
@@ -296,15 +308,15 @@ footer address, footer .sources {
         gap: var(--space-s);
 }
 
-.cv-info dt{
+.cv-info dt {
         flex: 1;
 }
 
-.cv-info dd{
+.cv-info dd {
         margin: 0;
 }
 
-.cv-info meter{
+.cv-info meter {
         width: 8rem;
         height: 0.75rem;
         vertical-align: middle;
@@ -325,6 +337,7 @@ footer address, footer .sources {
         background: var(--color-accent);
 }
 
+/* Firefox has no pseudo-element for the track, so there the meter element itself is styled as the track */
 @supports selector(::-moz-meter-bar) {
         .cv-info meter {
                 background: var(--color-brand-pink);
@@ -333,15 +346,17 @@ footer address, footer .sources {
         }
 }
 
-@media(max-width: 768px){
-        .cv-container{
+@media (max-width: 768px) {
+        .cv-container {
                 flex-direction: column;
         }
 
-        .cv-profile{
+        .cv-profile {
                 flex: none;
         }
 }
+
+/* Schedule */
 
 .schedule-table {
         overflow-x: auto;
@@ -353,11 +368,11 @@ footer address, footer .sources {
 }
 
 .schedule-table th, .schedule-table td {
-        border: 
+        border:
                 1px
                 solid
                 var(--color-muted-text);
-        padding: var(--space-xs);        
+        padding: var(--space-xs);
 }
 
 .schedule-table thead th {
@@ -372,22 +387,24 @@ footer address, footer .sources {
         background-color: var(--color-brand-pink-strong);
 }
 
+/* Inset shadow draws a frame inside the cell: unlike a border, it does not change the cell size */
 .schedule-table .pe {
-        box-shadow: 
-                inset 
-                0 0 0 
-                3px 
+        box-shadow:
+                inset
+                0 0 0
+                3px
                 var(--color-accent);
 }
 
 .schedule-table .is-current {
-        box-shadow: 
-                inset 
-                0 0 0 
-                3px 
+        box-shadow:
+                inset
+                0 0 0
+                3px
                 var(--color-link);
 }
 
+/* Only the cell content is hidden, so the cell keeps its place and the table does not change shape */
 .schedule-table .is-filtered-out {
         background: none;
         box-shadow: none;
@@ -412,7 +429,7 @@ footer address, footer .sources {
         max-width: 50%;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
         .schedule-legend > div {
                 max-width: 100%;
         }
@@ -427,7 +444,7 @@ footer address, footer .sources {
         margin: 0;
 }
 
-.schedule-filter button, .map-panel button{
+.schedule-filter button, .map-panel button {
         font: inherit;
         background: none;
         color: var(--color-link);
@@ -435,7 +452,7 @@ footer address, footer .sources {
         cursor: pointer;
 }
 
-.schedule-filter button{
+.schedule-filter button {
         flex: 1;
 }
 
@@ -465,11 +482,14 @@ footer address, footer .sources {
         background: var(--color-accent);
 }
 
+/* Map */
+
 .map-container {
         display: flex;
         gap: var(--space-l);
 }
 
+/* A flex item cannot shrink below its content by default; min-width: 0 lets the map shrink with the window */
 .map-section {
         flex: 2;
         min-width: 0;
@@ -568,13 +588,13 @@ footer address, footer .sources {
         color: var(--color-link);
 }
 
-@media(any-hover: hover){
+@media (any-hover: hover) {
         .map .leaflet-bar a:hover {
                 background-color: var(--color-surface);
         }
 }
 
-@media screen and (prefers-color-scheme: dark){
+@media screen and (prefers-color-scheme: dark) {
         .map .leaflet-tile-pane {
                 filter: brightness(0.7);
         }
@@ -624,7 +644,7 @@ footer address, footer .sources {
         overflow-wrap: anywhere;
 }
 
-@media(max-width: 768px){
+@media (max-width: 768px) {
         .map-container {
                 flex-direction: column;
                 gap: 0;
@@ -634,6 +654,8 @@ footer address, footer .sources {
                 height: 50vh;
         }
 }
+
+/* Workspace */
 
 /* Grid area "image" is the containing block for hotspots, so their % are of the photo only */
 .workspace-image {
@@ -697,7 +719,7 @@ footer address, footer .sources {
                 inset 0 0 0 4px var(--color-text);
 }
 
-@media(any-hover: hover){
+@media (any-hover: hover) {
         .hotspot-button:hover {
                 box-shadow:
                         inset 0 0 0 2px var(--color-background),
@@ -705,6 +727,7 @@ footer address, footer .sources {
         }
 }
 
+/* Hidden with opacity + visibility instead of display: none: the panel keeps its size and can fade in */
 .hotspot-panel {
         position: absolute;
         grid-area: image;
@@ -722,11 +745,13 @@ footer address, footer .sources {
         visibility: hidden;
 }
 
+/* right is measured from the right side of the photo, so the panel ends at the right edge of the hotspot */
 .hotspot-end .hotspot-panel {
         left: auto;
         right: calc(100% - var(--x) - var(--w));
 }
 
+/* bottom is measured from the bottom of the photo, so the panel ends exactly at the top of the hotspot */
 .hotspot-up .hotspot-panel {
         top: auto;
         bottom: calc(100% - var(--y));
@@ -753,7 +778,7 @@ footer address, footer .sources {
         visibility: hidden;
 }
 
-@media(prefers-reduced-motion: no-preference){
+@media (prefers-reduced-motion: no-preference) {
         .hotspot-panel {
                 transition:
                         opacity 0.2s,
@@ -763,7 +788,7 @@ footer address, footer .sources {
 
 /* Small screens: all panels are stacked in one grid cell under the photo.
    Hidden panels still take space, so the cell is as tall as the longest text and nothing jumps */
-@media(max-width: 768px){
+@media (max-width: 768px) {
         .workspace-image {
                 grid-template-areas:
                         "image"

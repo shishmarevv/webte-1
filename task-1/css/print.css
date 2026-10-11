@@ -3,14 +3,14 @@
         size: A4;
 }
 
-@media print{
+@media print {
         :root {
                 --color-background: white;
                 --color-text: black;
                 --color-muted-text: #555555;
                 --color-link: var(--color-text);
                 --color-accent: #333333;
-                --color-brand-pink: #DDDDDD;     
+                --color-brand-pink: #DDDDDD;
         }
 
         html {
@@ -25,7 +25,7 @@
         h1, h2, h3, p, ul, dl {
                 margin-block: 0.4em;
         }
-        
+
         .skip-link, header, nav, footer {
                 display: none;
         }
@@ -38,7 +38,7 @@
                 flex: 0 0 32%;
         }
 
-        .cv-profile, .cv-info{
+        .cv-profile, .cv-info {
                 padding: 0;
                 background: none;
         }
@@ -47,12 +47,12 @@
                 print-color-adjust: exact;
         }
 
-        .cv-profile a{
+        .cv-profile a {
                 text-decoration: none;
                 font-size: 0.9em;
         }
 
-        .cv-profile img{
+        .cv-profile img {
                 max-width: 4cm;
         }
 }
