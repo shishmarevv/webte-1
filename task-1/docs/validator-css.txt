@@ -1,0 +1,73 @@
+=== css/styles.css (2026-10-11) https://jigsaw.w3.org/css-validator/
+W3C CSS Validator results for https://webte1.fei.stuba.sk/~xshishmarev/Z1_shishmarev/css/styles.css
+
+Congratulations! No Error Found.
+
+This document validates as CSS level 3 + SVG !
+
+To show your readers that you've taken the care to create an interoperable Web page, you may display this icon on any page that validates. Here is the XHTML you could use to add this icon to your Web page:
+
+<p>
+    <a href="https://jigsaw.w3.org/css-validator/">
+        <img style="border:0;width:88px;height:31px"
+            src="https://jigsaw.w3.org/css-validator/images/vcss"
+            alt="Valid CSS!" />
+    </a>
+</p>
+(close the img tag with &gt; instead of /&gt; if using HTML &lt;= 4.01)
+If you like, you can download a copy of this image to keep in your local web directory, and change the XHTML fragment above to reference your local image rather than the one on this server.
+If you would like to create a link to this page (i.e., this validation result) to make it easier to re-validate this page in the future or to allow others to validate your page, the URI is:
+    https://jigsaw.w3.org/css-validator/validator?_w3cwafkey=webte1.fei.stuba.sk&amp;warning=1
+or  https://jigsaw.w3.org/css-validator/check/referer (for HTML/XML document only)
+(Or, you can just add the current page to your bookmarks or hotlist.)
+
+Warnings (13)
+
+URI : https://webte1.fei.stuba.sk/~xshishmarev/Z1_shishmarev/css/styles.css
+
+Line : 325 -  “::-webkit-meter-bar” is a vendor extended pseudo-element
+Line : 332 -  “::-webkit-meter-optimum-value” is a vendor extended pseudo-element
+Line : 336 -  “::-moz-meter-bar” is a vendor extended pseudo-element
+Line : 341 -  “::-moz-meter-bar” is a vendor extended pseudo-element
+Line : 473 -  “::-webkit-progress-bar” is a vendor extended pseudo-element
+Line : 477 -  “::-webkit-progress-value” is a vendor extended pseudo-element
+Line : 481 -  “::-moz-progress-bar” is a vendor extended pseudo-element
+Line : 683 -  Due to their dynamic nature, CSS variables are currently not statically checked
+Line : 684 -  Due to their dynamic nature, CSS variables are currently not statically checked
+Line : 685 -  Due to their dynamic nature, CSS variables are currently not statically checked
+Line : 686 -  Due to their dynamic nature, CSS variables are currently not statically checked
+Line : 734 -  Due to their dynamic nature, CSS variables are currently not statically checked
+Line : 735 -  Due to their dynamic nature, CSS variables are currently not statically checked
+
+
+
+Valid CSS information
+
+
+=== css/print.css (2026-10-11) https://jigsaw.w3.org/css-validator/
+W3C CSS Validator results for https://webte1.fei.stuba.sk/~xshishmarev/Z1_shishmarev/css/print.css
+
+Congratulations! No Error Found.
+
+This document validates as CSS level 3 + SVG !
+
+To show your readers that you've taken the care to create an interoperable Web page, you may display this icon on any page that validates. Here is the XHTML you could use to add this icon to your Web page:
+
+<p>
+    <a href="https://jigsaw.w3.org/css-validator/">
+        <img style="border:0;width:88px;height:31px"
+            src="https://jigsaw.w3.org/css-validator/images/vcss"
+            alt="Valid CSS!" />
+    </a>
+</p>
+(close the img tag with &gt; instead of /&gt; if using HTML &lt;= 4.01)
+If you like, you can download a copy of this image to keep in your local web directory, and change the XHTML fragment above to reference your local image rather than the one on this server.
+If you would like to create a link to this page (i.e., this validation result) to make it easier to re-validate this page in the future or to allow others to validate your page, the URI is:
+    https://jigsaw.w3.org/css-validator/validator?_w3cwafkey=webte1.fei.stuba.sk&amp;warning=1
+or  https://jigsaw.w3.org/css-validator/check/referer (for HTML/XML document only)
+(Or, you can just add the current page to your bookmarks or hotlist.)
+
+
+Valid CSS information
+
+

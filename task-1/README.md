@@ -2,7 +2,7 @@
 
 **Viktor Shishmarev**, krúžok: Pondelok 11:00
 
-Stránka na školskom serveri: https://webte1.fei.stuba.sk/~xshishmarev/task-1/
+Stránka na školskom serveri: https://webte1.fei.stuba.sk/~xshishmarev/Z1_shishmarev/
 
 ## O webe
 

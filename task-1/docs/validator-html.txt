@@ -1,0 +1,15 @@
+=== index.html (2026-10-11) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
+=== pages/cv.html (2026-10-11) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
+=== pages/schedule.html (2026-10-11) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
+=== pages/workspace.html (2026-10-11) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
+=== pages/map.html (2026-10-11) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
