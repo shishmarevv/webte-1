@@ -14,6 +14,7 @@ Jedinou knižnicou je Leaflet na stránke s mapou.
 
 - Fotografie `img/pfp.jpg` a `img/workspace.jpg`: vlastné.
 - Obrázok `img/og-image.png`: vygenerovaný pomocou Claude.
+- Obrázok `favicon.ico`/`favicon.svg`: vygenerovaný pomocou Claude.
 - Písmo [JetBrains Mono](https://www.jetbrains.com/lp/mono/): SIL Open Font License 1.1, text licencie v `fonts/OFL.txt`.
 - Mapová knižnica [Leaflet 1.9.4](https://leafletjs.com/): BSD 2-Clause License, text licencie v `vendor/leaflet/LICENSE`.
 - Mapové podklady: © [prispievatelia OpenStreetMap](https://www.openstreetmap.org/copyright), licencia ODbL.
