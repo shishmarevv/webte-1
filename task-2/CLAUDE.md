@@ -16,7 +16,7 @@ A client-only site (HTML, CSS, JS) that loads restaurant/canteen pages near FEI 
 - HTML5 with DOCTYPE, maximum semantic tags (`header`, `nav`, `main`, `section`, `article`, `footer`, `time`, ...).
 - **Restaurants:** min. 3 near FEI that publish the menu in HTML (not image/PDF), each with a different page structure. Selection must be approved by the instructor.
 - **Loading:**
-  - CORS: the course proxy is NOT available to us. Store local copies of the restaurant pages in the project (e.g. `data/*.html`) and load those. The assignment still requires a switch "live page / local copy"; keep the live path behind a single configurable proxy URL. Never use public CORS proxies.
+  - CORS: the teacher stated that the proxy may not be used and that local copies may be used instead. Local copies in `data/*.html` are the only data source: no live mode, no "live / local" switch, no proxy URL. The PDF's switch requirement is treated as waived by that statement. Never use public CORS proxies.
   - Async via Fetch API or jQuery AJAX.
   - Parse with `DOMParser` + `querySelector(All)` / jQuery selectors. Regex over the whole document is NOT allowed (regex on a single extracted string, e.g. a price, is fine).
   - NEVER insert foreign HTML into our page (no `innerHTML` of fetched content). Only our own extracted values, set via `textContent` or built elements.
@@ -72,9 +72,8 @@ Since a CSS library is now required, it must not override this identity: map the
 
 ## Decisions
 
-- **Restaurants:** chosen later; no instructor approval needed. Still min. 3, HTML menus, different page structures.
-- **Local copies:** saved on Sunday/Monday so one snapshot covers the whole week. Stored in `data/<restaurant-id>.html`.
-- **Live mode:** a `PROXY_URL` constant in `js/config.js`, empty for now. Live mode with no proxy shows a clear "proxy nie je nastavený" error instead of breaking.
+- **Restaurants:** Eat&Meet (`eatandmeet.sk/tyzdenne-menu`), FIIT Food (`freefood.sk/menu/#fiit-food`), White Dragon (`whitedragon.sk/menucka/`). No instructor approval needed. Rejected: Edo-Kin (lunch is a PDF), Punjabi Dhaba (no daily dishes in HTML), Jedáleň STU (empty JS shell, HTML has no dishes), Delikanti (no prices).
+- **Local copies:** stored in `data/<restaurant-id>.html`, saved by hand from a browser ("HTML only") about once a week. All three hosts reject `curl` with firewall status 466, so there is no scheduled download, and that firewall must not be bypassed.
 - **CSS library:** Bootstrap 5, themed through its CSS variables with our tokens (not the stock Bootstrap look).
 - **JS library:** jQuery (AJAX + selectors for parsing).
 - **Libraries stored locally** in `vendor/` (as Leaflet in task 1), with their license files.
@@ -95,15 +94,15 @@ task-2/
 ├── favicon.svg / .ico    from task 1
 ├── css/styles.css        our tokens + Bootstrap variable overrides + own components
 ├── js/
-│   ├── config.js         PROXY_URL, list of restaurants (id, name, url, address, local file, parser)
-│   ├── parsers/          one file per restaurant: parse<Name>(doc) -> array of menu items
+│   ├── config.js         list of restaurants (id, name, url, address, local file, parser)
+│   ├── parsers/          utils.js + one file per restaurant: parse<Name>(doc) -> array of menu items
 │   ├── storage.js        localStorage read/write/clear per restaurant
-│   ├── loader.js         fetch (live via proxy / local copy) + DOMParser
+│   ├── loader.js         $.ajax of the local copy + DOMParser
 │   └── app.js            UI: day tabs, week view, filter, buttons, loading indicator, rendering
 ├── data/                 local HTML copies of restaurant pages
 ├── fonts/                JetBrains Mono .woff2 + OFL.txt
 ├── vendor/
-│   ├── bootstrap/        bootstrap.min.css, bootstrap.bundle.min.js, LICENSE
+│   ├── bootstrap/        bootstrap.min.css, LICENSE (CSS only, no Bootstrap JS)
 │   └── jquery/           jquery.min.js, LICENSE
 └── docs/                 validator outputs (HTML + CSS)
 ```

@@ -217,7 +217,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 .controls {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space) var(--space-l);
+        gap: var(--space);
         padding: var(--space);
         border-radius: var(--radius);
         background-color: var(--color-surface);
