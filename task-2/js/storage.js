@@ -28,6 +28,20 @@ function clearEntry(id) {
         }
 }
 
+// When a load fails, for example because a new copy of the page broke the parser,
+// the last good menu stays stored together with the error
+function keepLastGoodItems(entry, previous) {
+        if (entry.error === null || previous === null || previous.items.length === 0) {
+                return entry;
+        }
+
+        return {
+                items: previous.items,
+                fetchedAt: previous.fetchedAt,
+                error: entry.error
+        };
+}
+
 // A failed attempt is not fresh, so the next visit tries again
 function isFresh(entry) {
         if (entry === null || entry.error !== null) {

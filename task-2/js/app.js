@@ -39,20 +39,20 @@ function formatPrice(price) {
 }
 
 function buildPrice(item) {
-        const $price = $('<span>', { 'class': 'menu-price' });
+        const $price = $('<span>', { 'class': 'menu-price fw-bold text-nowrap' });
 
         if (item.price === null) {
-                return $price.addClass('menu-price-included').text('cena neuvedená');
+                return $price.addClass('small').text('cena neuvedená');
         }
 
         if (item.price === 0) {
-                return $price.addClass('menu-price-included').text('v cene menu');
+                return $price.addClass('small').text('v cene menu');
         }
 
         $price.text(formatPrice(item.price));
 
         if (item.priceStudent !== null) {
-                $('<span>', { 'class': 'menu-price-student' })
+                $('<span>', { 'class': 'd-block small fw-semibold' })
                         .text('ISIC ' + formatPrice(item.priceStudent))
                         .appendTo($price);
         }
@@ -61,7 +61,8 @@ function buildPrice(item) {
 }
 
 function buildItem(item) {
-        const $item = $('<li>', { 'class': 'menu-item' });
+        const $item = $('<li>', { 'class': 'd-flex flex-wrap justify-content-between column-gap-3 ps-2 py-1 border-start border-3' });
+        const $dish = $('<div>', { 'class': 'menu-dish' }).appendTo($item);
         const meta = [];
 
         if (item.weight) {
@@ -72,38 +73,45 @@ function buildItem(item) {
                 meta.push('alergény: ' + item.allergens);
         }
 
-        $('<span>', { 'class': 'menu-name' }).text(item.name).appendTo($item);
+        $('<span>', { 'class': 'd-block lh-sm' }).text(item.name).appendTo($dish);
 
         if (meta.length > 0) {
-                $('<span>', { 'class': 'menu-meta' }).text(meta.join(' · ')).appendTo($item);
+                $('<span>', { 'class': 'd-block small text-body-secondary' }).text(meta.join(' · ')).appendTo($dish);
         }
 
         return $item.append(buildPrice(item));
 }
 
 function buildGroup(type, items) {
-        const $group = $('<section>', { 'class': 'menu-group menu-group-' + type });
-        const $list = $('<ul>', { 'class': 'menu-list' }).append(items.map(buildItem));
-
-        return $group.append(
-                $('<h5>', { 'class': 'menu-group-title' }).text(TYPE_TITLES[type]),
-                $list
+        return $('<section>', { 'class': 'menu-group menu-group-' + type }).append(
+                $('<h5>', { 'class': 'fs-6 mb-1' }).append(
+                        $('<span>', { 'class': 'badge text-uppercase' }).text(TYPE_TITLES[type])
+                ),
+                $('<ul>', { 'class': 'list-unstyled vstack gap-2 mb-0' }).append(items.map(buildItem))
         );
 }
 
+function buildMessage(text) {
+        return $('<p>', { 'class': 'mb-0 text-body-secondary' }).text(text);
+}
+
+function buildWarning(text) {
+        return $('<p>', { 'class': 'alert alert-warning mb-3' }).text(text);
+}
+
 function buildDay(items, day) {
-        const $day = $('<section>', { 'class': 'day-menu' });
-        const $heading = $('<h4>', { 'class': 'day-heading' }).text(DAY_NAMES[day]);
+        const $day = $('<section>', { 'class': 'vstack gap-3' });
+        const $heading = $('<h4>', { 'class': 'fs-6 mb-0' }).text(DAY_NAMES[day]);
         const date = items.length > 0 ? items[0].date : null;
 
         if (date !== null) {
-                $heading.append(' ', $('<time>', { datetime: date }).text(formatDate(date)));
+                $heading.append(' ', $('<time>', { 'class': 'small fw-normal text-body-secondary', datetime: date }).text(formatDate(date)));
         }
 
         $day.append($heading);
 
         if (items.length === 0) {
-                return $day.append($('<p>', { 'class': 'menu-message' }).text(NOT_AVAILABLE));
+                return $day.append(buildMessage(NOT_AVAILABLE));
         }
 
         Object.keys(TYPE_TITLES).forEach(function (type) {
@@ -129,7 +137,7 @@ function buildWeek(entry) {
         const $row = $('<div>', { 'class': 'row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-3' });
 
         DAY_NAMES.forEach(function (name, day) {
-                $('<div>', { 'class': 'col week-day' })
+                $('<div>', { 'class': 'col' })
                         .append(buildDay(itemsOfDay(entry, day), day))
                         .appendTo($row);
         });
@@ -137,39 +145,48 @@ function buildWeek(entry) {
         return $row;
 }
 
+function buildMenu(entry) {
+        if (state.selection === WEEK) {
+                return buildWeek(entry);
+        }
+
+        if (state.selection === null) {
+                return buildMessage(NOT_AVAILABLE);
+        }
+
+        return buildDay(itemsOfDay(entry, state.selection), state.selection);
+}
+
 function buildCardBody(restaurant) {
         const entry = state.entries[restaurant.id];
 
         if (state.loading[restaurant.id]) {
-                return $('<div>', { 'class': 'card-loading' }).append(
+                return $('<div>', { 'class': 'd-flex align-items-center gap-2 text-body-secondary' }).append(
                         $('<span>', { 'class': 'spinner-border spinner-border-sm', 'aria-hidden': 'true' }),
                         $('<span>').text('Načítavam menu…')
                 );
         }
 
         if (entry === null) {
-                return $('<p>', { 'class': 'menu-message' }).text('Uložené dáta sú vymazané. Načítajte ich tlačidlom „Aktualizovať menu“.');
+                return buildMessage('Uložené dáta sú vymazané. Načítajte ich tlačidlom „Aktualizovať menu“.');
         }
 
+        if (entry.items.length === 0) {
+                return buildWarning(NOT_AVAILABLE + ' ' + entry.error).removeClass('mb-3').addClass('mb-0');
+        }
+
+        // The load failed, but the last good menu is still there
         if (entry.error !== null) {
-                return $('<p>', { 'class': 'alert alert-note mb-0' }).text(NOT_AVAILABLE + ' ' + entry.error);
+                return [buildWarning('Zobrazuje sa posledné uložené menu. ' + entry.error), buildMenu(entry)];
         }
 
-        if (state.selection === WEEK) {
-                return buildWeek(entry);
-        }
-
-        if (state.selection === null) {
-                return $('<p>', { 'class': 'menu-message' }).text(NOT_AVAILABLE);
-        }
-
-        return buildDay(itemsOfDay(entry, state.selection), state.selection);
+        return buildMenu(entry);
 }
 
 function buildCardFooter(entry) {
-        const label = entry.error === null ? 'Aktualizované: ' : 'Posledný pokus: ';
+        const label = entry.items.length > 0 ? 'Aktualizované: ' : 'Posledný pokus: ';
 
-        return $('<footer>', { 'class': 'card-footer restaurant-updated' }).append(
+        return $('<footer>', { 'class': 'card-footer bg-body-tertiary small text-body-secondary' }).append(
                 label,
                 $('<time>', { datetime: entry.fetchedAt }).text(formatDateTime(entry.fetchedAt))
         );
@@ -180,11 +197,11 @@ function buildCard(restaurant) {
         const columns = state.selection === WEEK ? 'col-12' : 'col-12 col-md-6 col-xl-4';
         const $card = $('<div>', { 'class': 'card h-100' });
 
-        $('<header>', { 'class': 'card-header' }).append(
-                $('<h3>', { 'class': 'restaurant-name' }).append(
+        $('<header>', { 'class': 'card-header bg-body-tertiary' }).append(
+                $('<h3>', { 'class': 'fs-5 mb-0' }).append(
                         $('<a>', { href: restaurant.url, target: '_blank', rel: 'noopener' }).text(restaurant.name)
                 ),
-                $('<address>', { 'class': 'restaurant-address' }).text(restaurant.address)
+                $('<address>', { 'class': 'small text-body-secondary mb-0' }).text(restaurant.address)
         ).appendTo($card);
 
         $('<div>', { 'class': 'card-body' }).append(buildCardBody(restaurant)).appendTo($card);
@@ -204,8 +221,8 @@ function renderMenu() {
         $('#restaurants').empty().append(visible.map(buildCard));
 
         if (visible.length === 0) {
-                $('<p>', { 'class': 'col-12 menu-message' })
-                        .text('Vyberte aspoň jednu reštauráciu.')
+                $('<div>', { 'class': 'col-12' })
+                        .append(buildMessage('Vyberte aspoň jednu reštauráciu.'))
                         .appendTo('#restaurants');
         }
 }
@@ -216,8 +233,12 @@ function renderControls() {
                 $(this).attr('aria-pressed', String(value === state.selection));
         });
 
+        // The week view needs room for five columns
+        $('.js-page-width')
+                .toggleClass('container-xxl', state.selection !== WEEK)
+                .toggleClass('container-fluid', state.selection === WEEK);
+
         $('#weekend-note').prop('hidden', state.selection !== null);
-        $('body').toggleClass('is-week', state.selection === WEEK);
 }
 
 function setBusy(isBusy) {
@@ -226,7 +247,6 @@ function setBusy(isBusy) {
 
 function refreshRestaurants(restaurants) {
         setBusy(true);
-        $('#status').text('Načítavam menu…');
 
         restaurants.forEach(function (restaurant) {
                 state.loading[restaurant.id] = true;
@@ -234,7 +254,9 @@ function refreshRestaurants(restaurants) {
         renderMenu();
 
         const loads = restaurants.map(function (restaurant) {
-                return loadRestaurant(restaurant).then(function (entry) {
+                return loadRestaurant(restaurant).then(function (loaded) {
+                        const entry = keepLastGoodItems(loaded, state.entries[restaurant.id]);
+
                         writeEntry(restaurant.id, entry);
                         state.entries[restaurant.id] = entry;
                         delete state.loading[restaurant.id];
@@ -244,7 +266,6 @@ function refreshRestaurants(restaurants) {
 
         Promise.all(loads).then(function () {
                 setBusy(false);
-                $('#status').text('Menu je aktualizované.');
         });
 }
 
@@ -254,13 +275,12 @@ function clearData() {
                 state.entries[restaurant.id] = null;
         });
 
-        $('#status').text('Uložené dáta sú vymazané.');
         renderMenu();
 }
 
 function buildFilter() {
         RESTAURANTS.forEach(function (restaurant) {
-                $('<button>', { type: 'button', 'class': 'btn btn-control', 'aria-pressed': 'true' })
+                $('<button>', { type: 'button', 'class': 'btn btn-sm btn-control', 'aria-pressed': 'true' })
                         .text(restaurant.name)
                         .on('click', function () {
                                 const isHidden = !state.hidden[restaurant.id];
@@ -302,14 +322,19 @@ function showSection() {
         document.title = SECTION_TITLES[hash];
 
         $('#navigation a').each(function () {
-                if ($(this).attr('href') === hash) {
+                const isCurrent = $(this).attr('href') === hash;
+
+                $(this).toggleClass('active', isCurrent);
+
+                if (isCurrent) {
                         $(this).attr('aria-current', 'page');
                 } else {
                         $(this).removeAttr('aria-current');
                 }
         });
 
-        $('#hamburger').attr('aria-expanded', 'false');
+        // On a phone the opened menu closes after choosing a section
+        bootstrap.Collapse.getOrCreateInstance(document.getElementById('navigation'), { toggle: false }).hide();
 }
 
 function bindEvents() {
@@ -324,11 +349,6 @@ function bindEvents() {
         });
 
         $('#clear').on('click', clearData);
-
-        $('#hamburger').removeAttr('hidden').on('click', function () {
-                const isExpanded = $(this).attr('aria-expanded') === 'true';
-                $(this).attr('aria-expanded', String(!isExpanded));
-        });
 
         $(window).on('hashchange', function () {
                 showSection();
@@ -351,11 +371,10 @@ function init() {
                 return !isFresh(state.entries[restaurant.id]);
         });
 
+        renderMenu();
+
         if (stale.length > 0) {
                 refreshRestaurants(stale);
-        } else {
-                $('#status').text('Menu je načítané z uložených dát.');
-                renderMenu();
         }
 }
 

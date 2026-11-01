@@ -74,7 +74,7 @@ Since a CSS library is now required, it must not override this identity: map the
 
 - **Restaurants:** Eat&Meet (`eatandmeet.sk/tyzdenne-menu`), FIIT Food (`freefood.sk/menu/#fiit-food`), White Dragon (`whitedragon.sk/menucka/`). No instructor approval needed. Rejected: Edo-Kin (lunch is a PDF), Punjabi Dhaba (no daily dishes in HTML), Jedáleň STU (empty JS shell, HTML has no dishes), Delikanti (no prices).
 - **Local copies:** stored in `data/<restaurant-id>.html`, saved by hand from a browser ("HTML only") about once a week. All three hosts reject `curl` with firewall status 466, so there is no scheduled download, and that firewall must not be bypassed.
-- **CSS library:** Bootstrap 5, themed through its CSS variables with our tokens (not the stock Bootstrap look).
+- **CSS library:** Bootstrap 5, themed through its CSS variables with our tokens (not the stock Bootstrap look). Bootstrap first: use its components and utilities in the markup. `css/styles.css` holds only tokens, `--bs-*` mapping, `@font-face` and what Bootstrap has no equivalent for. Bootstrap spacing utilities replace the `--space` scale, and its navbar replaces the task-1 hamburger.
 - **JS library:** jQuery (AJAX + selectors for parsing).
 - **Libraries stored locally** in `vendor/` (as Leaflet in task 1), with their license files.
 - **"O projekte"** is a section on `index.html`, not a separate page. Nav `<ul>` links to in-page anchors.
@@ -83,7 +83,7 @@ Since a CSS library is now required, it must not override this identity: map the
 - **Restaurant filter:** not persisted, resets on every visit.
 - **Dark mode:** kept, same tokens as task 1.
 - **Who codes:** Claude writes all code, the parsers too, and explains it.
-- **Cache:** one `localStorage` key per restaurant (e.g. `menu:<restaurant-id>`), each with its own data, fetch timestamp and error state, so one failing source does not affect the others.
+- **Cache:** one `localStorage` key per restaurant (e.g. `menu:<restaurant-id>`), each with its own data, fetch timestamp and error state, so one failing source does not affect the others. A failed load keeps the last good menu and shows a warning above it.
 
 ## File structure
 
@@ -102,7 +102,7 @@ task-2/
 ├── data/                 local HTML copies of restaurant pages
 ├── fonts/                JetBrains Mono .woff2 + OFL.txt
 ├── vendor/
-│   ├── bootstrap/        bootstrap.min.css, LICENSE (CSS only, no Bootstrap JS)
+│   ├── bootstrap/        bootstrap.min.css, bootstrap.bundle.min.js, LICENSE
 │   └── jquery/           jquery.min.js, LICENSE
 └── docs/                 validator outputs (HTML + CSS)
 ```

@@ -20,6 +20,11 @@ function parseEatAndMeet(doc) {
                         const description = card.querySelector('.desc');
                         const priceElement = card.querySelector('.price');
 
+                        // One broken card should not cost the whole menu
+                        if (description === null || priceElement === null) {
+                                return;
+                        }
+
                         // "4,50 € / 2,10 €": the reduced price is the nested span
                         const price = parsePrice(cleanText(priceElement.textContent).split('/')[0]);
                         const priceStudent = parsePrice(textOf(priceElement, 'span'));

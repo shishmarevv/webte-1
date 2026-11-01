@@ -44,7 +44,7 @@ Sťahovanie skriptom nefunguje, pretože firewall týchto stránok automatizovan
 
 ## Zdroje a licencie
 
-- CSS knižnica [Bootstrap 5.3.3](https://getbootstrap.com/) (iba CSS): MIT License, text licencie v `vendor/bootstrap/LICENSE`.
+- CSS knižnica [Bootstrap 5.3.3](https://getbootstrap.com/): MIT License, text licencie v `vendor/bootstrap/LICENSE`.
 - JS knižnica [jQuery 3.7.1](https://jquery.com/): MIT License, text licencie v `vendor/jquery/LICENSE`.
 - Písmo [JetBrains Mono](https://www.jetbrains.com/lp/mono/): SIL Open Font License 1.1, text licencie v `fonts/OFL.txt`.
 - Obrázok `favicon.ico`/`favicon.svg`: vygenerovaný pomocou Claude.
@@ -53,5 +53,5 @@ Sťahovanie skriptom nefunguje, pretože firewall týchto stránok automatizovan
 
 ## Použitie AI
 
-Kód stránky (HTML, CSS, JavaScript vrátane parserov), texty, návrh riešenia a testovanie vznikli pomocou modelu Claude Opus 5.5 na základe mojich požiadaviek a rozhodnutí.
+Pri vypracovaní zadania som používal model Claude Opus 5.5 (kód, návrh riešenia, ladenie, texty).
 Výber reštaurácií a ich lokálne kópie som urobil sám.
