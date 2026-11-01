@@ -16,7 +16,7 @@
         --space-xl: calc(4 * var(--space));
 
         --radius: 3px;
-        --page-width: 80rem;
+        --page-width: 84rem;
 
         /* Bootstrap reads these variables, so its components follow our tokens and dark mode */
         --bs-body-bg: var(--color-background);
@@ -91,7 +91,8 @@ body.is-week {
         --page-width: 110rem;
 }
 
-header, main, footer {
+/* Cards have their own header and footer elements, so these rules must stay on the page level */
+body > header, main, body > footer {
         width: 100%;
         max-width: var(--page-width);
         margin-inline: auto;
@@ -116,7 +117,7 @@ code {
 
 /* Header, nav, footer */
 
-header {
+body > header {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -173,14 +174,14 @@ nav button {
         display: none;
 }
 
-footer {
+body > footer {
         margin-top: var(--space-xl);
         padding-block: var(--space);
         border-top: 3px solid var(--color-surface);
         text-align: center;
 }
 
-footer p {
+body > footer p {
         margin: 0;
         color: var(--color-muted-text);
         font-size: 0.875rem;
@@ -493,13 +494,21 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 }
 
 @media (max-width: 768px) {
+        body > header {
+                flex-wrap: nowrap;
+        }
+
+        h1 {
+                font-size: 1rem;
+        }
+
         nav {
-                margin-left: auto;
+                position: relative;
+                flex: none;
         }
 
         nav button:not([hidden]) {
                 display: flex;
-                margin-left: auto;
         }
 
         /* The list is hidden only when the button (shown by JS) is collapsed; without JS the menu stays visible */
@@ -508,8 +517,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
         }
 
         nav ul {
-                margin-top: var(--space-s);
                 flex-direction: column;
+        }
+
+        /* With JS the list opens as a dropdown, so the title and the button share one row */
+        nav button:not([hidden]) + ul {
+                position: absolute;
+                right: 0;
+                z-index: 1;
+                min-width: 12rem;
+                margin-top: var(--space-s);
+                padding: var(--space-s);
+                border: 1px solid var(--color-brand-green);
+                border-radius: var(--radius);
+                background-color: var(--color-background);
         }
 
         .control-group {
