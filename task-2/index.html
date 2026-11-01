@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="sk">
+        <head>
+                <meta charset="utf-8">
+
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="description" content="Denné menu reštaurácií a jedální v okolí FEI STU na jednom mieste, podľa dní v týždni.">
+
+                <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+                <link rel="stylesheet" href="css/styles.css">
+
+                <link rel="icon" href="favicon.ico" sizes="32x32">
+                <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+                <script defer src="vendor/jquery/jquery.min.js"></script>
+                <script defer src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+                <script defer src="js/parsers/utils.js"></script>
+                <script defer src="js/parsers/eatandmeet.js"></script>
+                <script defer src="js/parsers/fiitfood.js"></script>
+                <script defer src="js/parsers/whitedragon.js"></script>
+                <script defer src="js/config.js"></script>
+                <script defer src="js/storage.js"></script>
+                <script defer src="js/loader.js"></script>
+                <script defer src="js/app.js"></script>
+
+                <title>Obedové menu v okolí fakulty</title>
+        </head>
+        <body class="d-flex flex-column min-vh-100">
+                <a class="visually-hidden-focusable p-2" href="#main-content">
+                        Preskočiť na obsah
+                </a>
+
+                <header class="navbar navbar-expand-md">
+                        <div class="js-page-width container-xxl">
+                                <h1 class="col fs-5 m-0">
+                                        <a class="navbar-brand d-flex align-items-center gap-2 m-0 text-wrap" href="#menu">
+                                                <svg class="flex-shrink-0" width="36" height="36" viewBox="0 0 1260 1260" aria-hidden="true">
+                                                <path fill="currentColor" d="M86.9 280.9H329.9Q428.9 280.9 482.4 330.4Q535.9 379.9 535.9 464.9Q535.9 524.9 506.4 560.9Q476.9 596.9 422.9 612.9V617.9Q485.9 632.9 522.4 672.4Q558.9 711.9 558.9 783.9Q558.9 827.9 544.4 863.4Q529.9 898.9 503.4 924.9Q476.9 950.9 439.4 964.9Q401.9 978.9 354.9 978.9H86.9ZM314.9 883.9Q369.9 883.9 397.4 863.4Q424.9 842.9 424.9 792.9V759.9Q424.9 710.9 397.4 690.4Q369.9 669.9 314.9 669.9H214.9V883.9ZM297.9 578.9Q350.9 578.9 376.4 559.9Q401.9 540.9 401.9 493.9V460.9Q401.9 413.9 376.4 394.9Q350.9 375.9 297.9 375.9H214.9V578.9ZM640.9 280.9H754.9V877.9H849.9V280.9H963.9V877.9H1058.9V280.9H1172.9V978.9H640.9Z"/>
+                                        </svg>
+                                                <span>
+                                                        Obedové menu v okolí fakulty
+                                                </span>
+                                        </a>
+                                </h1>
+
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Menu">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                                <path d="M5 17H13M5 12H19M11 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                </button>
+
+                                <nav id="navigation" class="collapse navbar-collapse" aria-label="Hlavná navigácia">
+                                        <ul class="navbar-nav nav-pills ms-auto gap-1">
+                                                <li class="nav-item">
+                                                        <a class="nav-link active px-3" href="#menu" aria-current="page">
+                                                                Denné menu
+                                                        </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                        <a class="nav-link px-3" href="#o-projekte">
+                                                                O projekte
+                                                        </a>
+                                                </li>
+                                        </ul>
+                                </nav>
+                        </div>
+                </header>
+
+                <main id="main-content" class="js-page-width container-xxl flex-grow-1">
+                        <section id="menu" aria-labelledby="menu-heading">
+                                <h2 id="menu-heading">
+                                        Denné menu
+                                </h2>
+                                <p id="today" class="text-body-secondary"></p>
+
+                                <noscript>
+                                        <p class="alert alert-warning">
+                                                Na zobrazenie menu je potrebný JavaScript.
+                                        </p>
+                                </noscript>
+
+                                <div class="p-3 mb-4 rounded bg-body-tertiary">
+                                        <div class="row g-3">
+                                                <div class="col-12 col-md-auto">
+                                                        <span id="day-label" class="d-block mb-1 small fw-semibold text-uppercase text-body-secondary">
+                                                                Deň
+                                                        </span>
+                                                        <div id="day-picker" class="d-flex flex-wrap gap-1" role="group" aria-labelledby="day-label">
+                                                                <button type="button" class="btn btn-sm btn-control flex-fill" data-day="0" aria-pressed="false" aria-label="Pondelok">
+                                                                        <span class="d-lg-none" aria-hidden="true">Po</span>
+                                                                        <span class="d-none d-lg-inline" aria-hidden="true">Pondelok</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-control flex-fill" data-day="1" aria-pressed="false" aria-label="Utorok">
+                                                                        <span class="d-lg-none" aria-hidden="true">Ut</span>
+                                                                        <span class="d-none d-lg-inline" aria-hidden="true">Utorok</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-control flex-fill" data-day="2" aria-pressed="false" aria-label="Streda">
+                                                                        <span class="d-lg-none" aria-hidden="true">St</span>
+                                                                        <span class="d-none d-lg-inline" aria-hidden="true">Streda</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-control flex-fill" data-day="3" aria-pressed="false" aria-label="Štvrtok">
+                                                                        <span class="d-lg-none" aria-hidden="true">Št</span>
+                                                                        <span class="d-none d-lg-inline" aria-hidden="true">Štvrtok</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-control flex-fill" data-day="4" aria-pressed="false" aria-label="Piatok">
+                                                                        <span class="d-lg-none" aria-hidden="true">Pi</span>
+                                                                        <span class="d-none d-lg-inline" aria-hidden="true">Piatok</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-control flex-fill" data-day="week" aria-pressed="false">
+                                                                        Celý týždeň
+                                                                </button>
+                                                        </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-auto">
+                                                        <span id="filter-label" class="d-block mb-1 small fw-semibold text-uppercase text-body-secondary">
+                                                                Reštaurácie
+                                                        </span>
+                                                        <div id="restaurant-filter" class="d-flex flex-wrap gap-1" role="group" aria-labelledby="filter-label"></div>
+                                                </div>
+
+                                                <div class="col-12 col-md-auto">
+                                                        <span class="d-block mb-1 small fw-semibold text-uppercase text-body-secondary">
+                                                                Dáta
+                                                        </span>
+                                                        <div class="d-flex flex-wrap gap-1">
+                                                                <button id="refresh" type="button" class="btn btn-sm btn-control">
+                                                                        Aktualizovať menu
+                                                                </button>
+                                                                <button id="clear" type="button" class="btn btn-sm btn-control">
+                                                                        Vymazať dáta
+                                                                </button>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <p id="weekend-note" class="alert alert-warning" hidden>
+                                        Cez víkend menu nie je k dispozícii. Vyberte si deň v týždni alebo celý týždeň.
+                                </p>
+
+                                <div id="restaurants" class="row g-4"></div>
+
+                                <details class="mt-4 small text-body-secondary">
+                                        <summary>
+                                                Zoznam alergénov
+                                        </summary>
+                                        <ol class="mt-2">
+                                                <li>Obilniny obsahujúce lepok</li>
+                                                <li>Kôrovce</li>
+                                                <li>Vajcia</li>
+                                                <li>Ryby</li>
+                                                <li>Arašidy</li>
+                                                <li>Sójové zrná</li>
+                                                <li>Mlieko</li>
+                                                <li>Orechy</li>
+                                                <li>Zeler</li>
+                                                <li>Horčica</li>
+                                                <li>Sezamové semená</li>
+                                                <li>Oxid siričitý a siričitany</li>
+                                                <li>Vlčí bôb</li>
+                                                <li>Mäkkýše</li>
+                                        </ol>
+                                </details>
+                        </section>
+
+                        <section id="o-projekte" class="col-lg-9" aria-labelledby="about-heading" hidden>
+                                <h2 id="about-heading">
+                                        O projekte
+                                </h2>
+                                <p>
+                                        Stránka zbiera denné menu reštaurácií a jedální v okolí FEI STU a zobrazuje ich na jednom mieste, podľa dní v týždni.
+                                        Celé riešenie beží v prehliadači, bez vlastného servera. Vzniklo ako 2. zadanie z predmetu WEBTE1.
+                                </p>
+
+                                <h3>
+                                        Zdroje dát
+                                </h3>
+                                <p>
+                                        Prehliadač kvôli politike CORS nemôže čítať cudzie stránky priamo.
+                                        Proxy sa podľa pokynu cvičiaceho nepoužíva, preto sú stránky reštaurácií uložené ako lokálne kópie v priečinku <code>data/</code> a dáta sa načítavajú z nich.
+                                        Tlačidlo „Aktualizovať menu“ tieto kópie znova načíta a spracuje.
+                                </p>
+                                <ul>
+                                        <li>
+                                                <a href="https://eatandmeet.sk/tyzdenne-menu" target="_blank" rel="noopener">Eat&amp;Meet</a>: <code>data/eatandmeet.html</code>
+                                        </li>
+                                        <li>
+                                                <a href="http://www.freefood.sk/menu/#fiit-food" target="_blank" rel="noopener">FIIT Food</a>: <code>data/fiitfood.html</code>
+                                        </li>
+                                        <li>
+                                                <a href="https://whitedragon.sk/menucka/" target="_blank" rel="noopener">White Dragon</a>: <code>data/whitedragon.html</code>
+                                        </li>
+                                </ul>
+
+                                <h3>
+                                        Spracovanie dát
+                                </h3>
+                                <ol>
+                                        <li>Kópia stránky sa načíta asynchrónne cez jQuery AJAX.</li>
+                                        <li><code>DOMParser</code> z textu vytvorí samostatný dokument, ktorý sa do našej stránky nevkladá. Jeho skripty sa nespúšťajú.</li>
+                                        <li>Každá reštaurácia má vlastnú funkciu, ktorá v dokumente hľadá údaje cez <code>querySelector</code> a vracia ich v jednotnej štruktúre: deň, dátum, typ, názov, cena, alergény a hmotnosť.</li>
+                                        <li>Výsledok sa uloží do <code>localStorage</code> a v ten istý deň sa stránky znova nenačítavajú.</li>
+                                        <li>Na stránku sa vkladajú iba vybrané údaje ako text, nikdy cudzie HTML.</li>
+                                </ol>
+                                <p>
+                                        Ak sa stránku nepodarí načítať alebo sa zmení jej štruktúra, chyba sa zobrazí iba pri danej reštaurácii a ostatné fungujú ďalej.
+                                </p>
+
+                                <h3>
+                                        Použité knižnice
+                                </h3>
+                                <ul>
+                                        <li>
+                                                <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 5.3.3</a>: rozloženie, komponenty a rozbaľovacia navigácia, licencia MIT
+                                        </li>
+                                        <li>
+                                                <a href="https://jquery.com/" target="_blank" rel="noopener">jQuery 3.7.1</a>: AJAX a práca s DOM, licencia MIT
+                                        </li>
+                                        <li>
+                                                <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a>: písmo, licencia SIL OFL 1.1
+                                        </li>
+                                </ul>
+                        </section>
+                </main>
+
+                <footer class="js-page-width container-xxl mt-5 py-3 border-top border-3 text-center small text-body-secondary">
+                        <p class="mb-0">
+                                Viktor Shishmarev, WEBTE1, ZS 2026/2027
+                        </p>
+                        <p class="mb-0">
+                                Knižnice: Bootstrap 5.3.3, jQuery 3.7.1. Písmo: JetBrains Mono.
+                        </p>
+                </footer>
+        </body>
+</html>
