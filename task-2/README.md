@@ -53,5 +53,4 @@ Sťahovanie skriptom nefunguje, pretože firewall týchto stránok automatizovan
 
 ## Použitie AI
 
-Pri vypracovaní zadania som používal model Claude Opus 5.5 (kód, návrh riešenia, ladenie, texty).
-Výber reštaurácií a ich lokálne kópie som urobil sám.
+Pri vypracovaní zadania som používal model Claude Opus 5.5 (návrh riešenia, ladenie).
