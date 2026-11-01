@@ -1,0 +1,8 @@
+=== index.html (2026-11-01) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
+=== index.html, vygenerovaný obsah: zobrazenie dňa (2026-11-01) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).
+
+=== index.html, vygenerovaný obsah: celý týždeň (2026-11-01) https://validator.w3.org/nu/
+The document validates according to the specified schema(s).

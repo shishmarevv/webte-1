@@ -54,4 +54,4 @@ Sťahovanie skriptom nefunguje, pretože firewall týchto stránok automatizovan
 ## Použitie AI
 
 Kód stránky (HTML, CSS, JavaScript vrátane parserov), texty, návrh riešenia a testovanie vznikli pomocou modelu Claude Opus 5.5 na základe mojich požiadaviek a rozhodnutí.
-Výber reštaurácií, ich lokálne kópie a kontrolu výsledku som urobil sám.
+Výber reštaurácií a ich lokálne kópie som urobil sám.
