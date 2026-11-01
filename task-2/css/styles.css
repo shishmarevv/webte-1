@@ -1,0 +1,531 @@
+:root {
+        --color-background: #FAF6EE;
+        --color-surface: #F0E9DA;
+        --color-brand-green: #B9D3B0;
+        --color-brand-pink: #F3CCD3;
+        --color-brand-pink-strong: #E7AEBB;
+        --color-text: #2B2A27;
+        --color-muted-text: #5E5A52;
+        --color-link: #2F5D3A;
+        --color-accent: #9A3B55;
+
+        --space: 1rem;
+        --space-xs: calc(0.25 * var(--space));
+        --space-s: calc(0.5 * var(--space));
+        --space-l: calc(2 * var(--space));
+        --space-xl: calc(4 * var(--space));
+
+        --radius: 3px;
+        --page-width: 80rem;
+
+        /* Bootstrap reads these variables, so its components follow our tokens and dark mode */
+        --bs-body-bg: var(--color-background);
+        --bs-body-color: var(--color-text);
+        --bs-body-font-family: 'JetBrains Mono', monospace;
+        --bs-body-line-height: 1.6;
+        --bs-secondary-color: var(--color-muted-text);
+        --bs-border-color: var(--color-surface);
+        --bs-border-radius: var(--radius);
+        --bs-code-color: var(--color-accent);
+
+        color-scheme: light dark;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+        :root {
+                --color-background: #1B1E1A;
+                --color-surface: #252A24;
+                --color-brand-green: #3E5A40;
+                --color-brand-pink: #5A3440;
+                --color-brand-pink-strong: #74404F;
+                --color-text: #EFE9DC;
+                --color-muted-text: #B8B1A3;
+                --color-link: #A9CCA0;
+                --color-accent: #F0B3C1;
+        }
+}
+
+@font-face {
+        font-family: 'JetBrains Mono';
+        src:
+                url('../fonts/JetBrainsMono-Regular.woff2')
+                format("woff2");
+        font-weight: 400;
+        font-display: swap;
+}
+
+@font-face {
+        font-family: 'JetBrains Mono';
+        src:
+                url('../fonts/JetBrainsMono-SemiBold.woff2')
+                format("woff2");
+        font-weight: 600;
+        font-display: swap;
+}
+
+@font-face {
+        font-family: 'JetBrains Mono';
+        src:
+                url('../fonts/JetBrainsMono-Bold.woff2')
+                format("woff2");
+        font-weight: 700;
+        font-display: swap;
+}
+
+/* Base */
+
+/* Otherwise a display rule from this file (e.g. display: flex) would win over the hidden attribute */
+[hidden] {
+        display: none !important;
+}
+
+body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+        padding-inline: var(--space);
+}
+
+/* The week view needs room for five columns */
+body.is-week {
+        --page-width: 110rem;
+}
+
+header, main, footer {
+        width: 100%;
+        max-width: var(--page-width);
+        margin-inline: auto;
+}
+
+/* body is a flex column and main takes the free space, so the footer stays at the bottom of short pages */
+main {
+        flex: 1;
+}
+
+a {
+        color: var(--color-link);
+}
+
+h1, h2, h3, h4, h5 {
+        font-weight: 700;
+}
+
+code {
+        overflow-wrap: anywhere;
+}
+
+/* Header, nav, footer */
+
+header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-s) var(--space);
+        padding-block: var(--space);
+}
+
+h1 {
+        margin: 0;
+        font-size: 1.25rem;
+}
+
+h1 a {
+        display: flex;
+        align-items: center;
+        gap: var(--space-s);
+        color: var(--color-text);
+        text-decoration: none;
+}
+
+h1 svg {
+        flex: none;
+        color: var(--color-link);
+}
+
+nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+}
+
+nav a {
+        display: block;
+        padding: var(--space-s) var(--space);
+        border-radius: var(--radius);
+        text-decoration: none;
+}
+
+nav a[aria-current="page"], nav a[aria-current="page"]:hover {
+        background-color: var(--color-brand-green);
+        color: var(--color-text);
+}
+
+nav button {
+        padding: var(--space-s);
+        border-radius: var(--radius);
+        border: 1px solid var(--color-muted-text);
+        background-color: var(--color-background);
+        color: var(--color-muted-text);
+        display: none;
+}
+
+footer {
+        margin-top: var(--space-xl);
+        padding-block: var(--space);
+        border-top: 3px solid var(--color-surface);
+        text-align: center;
+}
+
+footer p {
+        margin: 0;
+        color: var(--color-muted-text);
+        font-size: 0.875rem;
+}
+
+.skip-link {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        transform: translateY(-100%);
+        background-color: var(--color-surface);
+        color: var(--color-text);
+        padding: var(--space-s) var(--space);
+        border-radius: var(--radius);
+}
+
+.skip-link:focus {
+        transform: none;
+}
+
+a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible {
+        outline: 3px solid var(--color-accent);
+        outline-offset: 0;
+        box-shadow: none;
+}
+
+/* Controls */
+
+.today {
+        color: var(--color-muted-text);
+}
+
+.controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space) var(--space-l);
+        padding: var(--space);
+        border-radius: var(--radius);
+        background-color: var(--color-surface);
+}
+
+.control-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+}
+
+.control-label {
+        color: var(--color-muted-text);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+}
+
+.day-picker, .restaurant-filter, .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+}
+
+.btn-control {
+        --bs-btn-color: var(--color-text);
+        --bs-btn-bg: var(--color-background);
+        --bs-btn-border-color: var(--color-brand-green);
+        --bs-btn-hover-color: var(--color-text);
+        --bs-btn-hover-bg: var(--color-background);
+        --bs-btn-hover-border-color: var(--color-brand-green);
+        --bs-btn-active-color: var(--color-text);
+        --bs-btn-active-bg: var(--color-brand-green);
+        --bs-btn-active-border-color: var(--color-brand-green);
+        --bs-btn-disabled-color: var(--color-muted-text);
+        --bs-btn-disabled-bg: var(--color-background);
+        --bs-btn-disabled-border-color: var(--color-brand-green);
+        --bs-btn-border-radius: var(--radius);
+        --bs-btn-font-size: 0.875rem;
+}
+
+.btn-control[aria-pressed="true"] {
+        --bs-btn-bg: var(--color-brand-green);
+        --bs-btn-hover-bg: var(--color-brand-green);
+        font-weight: 600;
+}
+
+.btn-control[aria-current="date"] {
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+}
+
+.status {
+        min-height: 1.6em;
+        margin-block: var(--space-s);
+        color: var(--color-muted-text);
+        font-size: 0.875rem;
+}
+
+.alert {
+        --bs-alert-bg: var(--color-brand-pink);
+        --bs-alert-color: var(--color-text);
+        --bs-alert-border-color: var(--color-brand-pink-strong);
+        --bs-alert-border-radius: var(--radius);
+        --bs-alert-padding-x: var(--space);
+        --bs-alert-padding-y: var(--space-s);
+}
+
+/* Restaurant cards */
+
+.card {
+        --bs-card-bg: var(--color-background);
+        --bs-card-color: var(--color-text);
+        --bs-card-border-color: var(--color-brand-green);
+        --bs-card-border-radius: var(--radius);
+        --bs-card-inner-border-radius: var(--radius);
+        --bs-card-cap-bg: var(--color-surface);
+        --bs-card-cap-padding-y: var(--space-s);
+        --bs-card-cap-padding-x: var(--space);
+        --bs-card-spacer-y: var(--space);
+        --bs-card-spacer-x: var(--space);
+}
+
+.restaurant-name {
+        margin: 0;
+        font-size: 1.125rem;
+}
+
+.restaurant-address {
+        margin: 0;
+        color: var(--color-muted-text);
+        font-size: 0.875rem;
+        font-style: normal;
+}
+
+.restaurant-updated {
+        color: var(--color-muted-text);
+        font-size: 0.75rem;
+}
+
+.card-loading {
+        display: flex;
+        align-items: center;
+        gap: var(--space-s);
+        color: var(--color-muted-text);
+}
+
+.spinner-border {
+        color: var(--color-accent);
+}
+
+.day-heading {
+        margin-bottom: var(--space-s);
+        font-size: 1rem;
+}
+
+.day-heading time {
+        color: var(--color-muted-text);
+        font-size: 0.875rem;
+        font-weight: 400;
+}
+
+.menu-message {
+        margin: 0;
+        color: var(--color-muted-text);
+}
+
+/* Menu items */
+
+.menu-group + .menu-group {
+        margin-top: var(--space);
+}
+
+.menu-group-title {
+        display: inline-block;
+        margin-bottom: var(--space-xs);
+        padding-inline: var(--space-s);
+        border-radius: var(--radius);
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1.6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+}
+
+.menu-group-soup .menu-group-title {
+        background-color: var(--color-brand-pink);
+}
+
+.menu-group-main .menu-group-title {
+        background-color: var(--color-brand-green);
+}
+
+.menu-group-other .menu-group-title {
+        background-color: var(--color-surface);
+}
+
+.menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+}
+
+.menu-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 var(--space);
+        padding: var(--space-xs) 0 var(--space-xs) var(--space-s);
+        border-left: 3px solid var(--color-surface);
+}
+
+.menu-item + .menu-item {
+        margin-top: var(--space-s);
+}
+
+.menu-group-soup .menu-item {
+        border-left-color: var(--color-brand-pink-strong);
+}
+
+.menu-group-main .menu-item {
+        border-left-color: var(--color-brand-green);
+}
+
+.menu-name {
+        grid-column: 1;
+        font-size: 0.9375rem;
+        line-height: 1.4;
+}
+
+.menu-meta {
+        grid-column: 1;
+        color: var(--color-muted-text);
+        font-size: 0.75rem;
+}
+
+.menu-price {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        color: var(--color-accent);
+        font-weight: 700;
+        text-align: right;
+        white-space: nowrap;
+}
+
+.menu-price-included {
+        font-size: 0.75rem;
+        font-weight: 600;
+}
+
+.menu-price-student {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+}
+
+/* Week view: narrow columns, so the price moves under the dish */
+
+.week-day {
+        min-width: 0;
+}
+
+.week-day .menu-item {
+        grid-template-columns: 1fr;
+}
+
+.week-day .menu-price {
+        grid-column: 1;
+        grid-row: auto;
+        text-align: left;
+}
+
+.week-day .menu-price-student {
+        display: inline;
+        margin-left: var(--space-s);
+}
+
+/* About and legend */
+
+.about {
+        max-width: 75ch;
+}
+
+.allergen-legend {
+        margin-top: var(--space-l);
+        color: var(--color-muted-text);
+        font-size: 0.875rem;
+}
+
+.allergen-legend summary {
+        cursor: pointer;
+}
+
+.allergen-legend ol {
+        margin-top: var(--space-s);
+        columns: 2;
+}
+
+/* Hover only on devices that can hover, so a tap on a phone does not leave the hover colour behind */
+@media (any-hover: hover) {
+        nav a:hover, nav button:hover {
+                background-color: var(--color-surface);
+        }
+
+        .btn-control {
+                --bs-btn-hover-bg: var(--color-surface);
+        }
+
+        .btn-control[aria-pressed="true"] {
+                --bs-btn-hover-bg: var(--color-brand-green);
+        }
+}
+
+@media (max-width: 768px) {
+        nav {
+                margin-left: auto;
+        }
+
+        nav button:not([hidden]) {
+                display: flex;
+                margin-left: auto;
+        }
+
+        /* The list is hidden only when the button (shown by JS) is collapsed; without JS the menu stays visible */
+        nav button:not([hidden])[aria-expanded="false"] + ul {
+                display: none;
+        }
+
+        nav ul {
+                margin-top: var(--space-s);
+                flex-direction: column;
+        }
+
+        .control-group {
+                width: 100%;
+        }
+
+        .day-picker {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+        }
+
+        .day-picker-week {
+                grid-column: 1 / -1;
+        }
+
+        .allergen-legend ol {
+                columns: 1;
+        }
+}
