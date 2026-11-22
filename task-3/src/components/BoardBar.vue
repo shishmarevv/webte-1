@@ -22,7 +22,7 @@ function startNew() {
 </script>
 
 <template>
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
                 <p class="mb-0">
                         Študent: <strong>{{ board.student }}</strong>, {{ taskCount }}
                         <button type="button" class="btn btn-link btn-sm p-0 ms-2 align-baseline" @click="leave">
@@ -42,16 +42,15 @@ function startNew() {
                 </div>
         </div>
 
-        <!-- State of the communication with the server -->
-        <p v-if="board.busy" class="text-body-secondary" role="status">
-                <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                Ukladám zmenu na server…
+        <!-- State of the communication with the server. The line is always there with the same height,
+             only its text changes, so the page below does not jump while a change is being saved. -->
+        <p class="status-line small text-body-secondary mb-2" role="status">
+                <template v-if="board.busy || board.loading">
+                        <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                        {{ board.busy ? 'Ukladám zmenu na server…' : 'Načítavam úlohy zo servera…' }}
+                </template>
         </p>
-        <p v-else-if="board.loading" class="text-body-secondary" role="status">
-                <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                Načítavam úlohy zo servera…
-        </p>
-        <div v-else-if="board.problem" class="alert alert-warning d-flex flex-wrap align-items-center justify-content-between gap-2" role="alert">
+        <div v-if="board.problem && !board.loading" class="alert alert-warning d-flex flex-wrap align-items-center justify-content-between gap-2" role="alert">
                 {{ board.problem }}
                 <button type="button" class="btn btn-sm btn-control" @click="pullTasks">
                         Skúsiť znova

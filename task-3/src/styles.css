@@ -115,6 +115,11 @@ h1, h2, h3 {
         border-left-color: var(--color-accent);
 }
 
+/* Reserved height for the spinner line, also when it is empty */
+.status-line {
+        min-height: 1.5rem;
+}
+
 /* Each open dialog darkens what is under it, also a question over the task detail */
 .popup-dim {
         background-color: rgb(0 0 0 / 0.5);
