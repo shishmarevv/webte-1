@@ -1,0 +1,25 @@
+{
+        "name": "moj-todo-list",
+        "private": true,
+        "version": "1.0.0",
+        "type": "module",
+        "scripts": {
+                "dev": "vite",
+                "build": "vite build",
+                "preview": "vite preview"
+        },
+        "dependencies": {
+                "@fullcalendar/core": "^6.1.22",
+                "@fullcalendar/daygrid": "^6.1.22",
+                "@fullcalendar/interaction": "^6.1.22",
+                "@fullcalendar/timegrid": "^6.1.22",
+                "@fullcalendar/vue3": "^6.1.22",
+                "bootstrap": "^5.3.9",
+                "vue": "^3.5.46",
+                "vue-router": "^4.6.5"
+        },
+        "devDependencies": {
+                "@vitejs/plugin-vue": "^6.0.11",
+                "vite": "^8.3.8"
+        }
+}
