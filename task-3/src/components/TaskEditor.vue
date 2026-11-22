@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref, onMounted } from 'vue';
 import PopupFrame from './PopupFrame.vue';
-import { board, pinTask, rewriteTask, closeEditor, TASK_LIMIT } from '../board.js';
+import { board, waiting, pinTask, rewriteTask, closeEditor, TASK_LIMIT } from '../board.js';
 import { forInput, fromInput, checkTask, TITLE_MAX, DESCRIPTION_MAX } from '../helpers.js';
 
 // board.editor is { task } when editing, { start, end } for a new task
@@ -10,7 +10,7 @@ const editing = Boolean(original);
 
 const draft = reactive({
         title: editing ? original.title : '',
-        description: editing ? original.description : '',
+        description: editing ? original.description || '' : '',
         date_from: forInput(editing ? new Date(original.date_from) : board.editor.start),
         date_to: forInput(editing ? new Date(original.date_to) : board.editor.end),
         is_finished: editing ? original.is_finished : false
@@ -26,7 +26,7 @@ onMounted(function () {
 
 async function save() {
         // The button is disabled while sending, this also stops a second submit by the Enter key
-        if (board.busy) {
+        if (waiting()) {
                 return;
         }
         mistakes.value = checkTask(draft);
@@ -51,10 +51,17 @@ async function save() {
                 failed.value = true;
         }
 }
+
+// The form cannot be closed while it is being saved, its result belongs to it
+function cancel() {
+        if (!board.busy) {
+                closeEditor();
+        }
+}
 </script>
 
 <template>
-        <PopupFrame :title="editing ? 'Upraviť úlohu' : 'Nová úloha'" @close="closeEditor">
+        <PopupFrame :title="editing ? 'Upraviť úlohu' : 'Nová úloha'" @close="cancel">
                 <div class="modal-body">
                         <p v-if="!editing && board.tasks.length >= TASK_LIMIT" class="alert alert-warning small">
                                 Máte {{ TASK_LIMIT }} úloh, čo je limit servera. Pri vytvorení ďalšej úlohy server nahradí celý zoznam piatimi ukážkovými úlohami.
@@ -106,11 +113,11 @@ async function save() {
                 </div>
 
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-control" @click="closeEditor">
+                        <button type="button" class="btn btn-control" :disabled="board.busy" @click="cancel">
                                 Zrušiť
                         </button>
                         <!-- The button is outside the <form>, the form attribute connects them -->
-                        <button type="submit" form="task-form" class="btn btn-brand" :disabled="board.busy">
+                        <button type="submit" form="task-form" class="btn btn-brand" :disabled="waiting()">
                                 <span v-if="board.busy" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
                                 {{ board.busy ? 'Ukladám…' : (editing ? 'Uložiť zmeny' : 'Vytvoriť úlohu') }}
                         </button>

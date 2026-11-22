@@ -85,6 +85,8 @@ Base `https://wt1zadanie.iolab.sk`, OpenAPI at `/docs` and `/openapi.json`. CORS
 - **State:** one plain `reactive()` object `board` in `src/board.js` (no Pinia) holds the student, tasks, loading/busy flags, notices and which dialog is open. Calendar events and the list are both computed from `board.tasks`.
 - **Server is the truth:** every change goes through `change()` in `board.js`: send the request, show a notice, then read the whole list again (`pullTasks`). No local patching of the array, so the list, the calendar and the server can never disagree (this also covers the 50-task reset and tasks deleted elsewhere). One `board.busy` flag disables all action buttons while a change runs.
 - **No layout jumps:** the spinner line in `BoardBar` (`.status-line`) is always rendered with a reserved height and only its text changes. Showing it with `v-if` made the whole page jump 41px on every change.
+- **One request at a time:** `waiting()` in `board.js` (= `busy || loading`) disables every action button while the app waits for the server, so requests never overlap and an older answer cannot overwrite a newer one. The task form cannot be closed while it is saving. `recheckTask` is skipped while another request runs.
+- **Gotcha when writing files:** the editing tools turned `\u0300` escapes into the raw combining characters. Write such regex escapes via `chr(92)` in a script and check with `grep -P '[\x{0300}-\x{036f}]'`.
 - **GET one task** (`/api/{name}/{id}`) is used when the task detail opens (`recheckTask`).
 - **Student name:** asked on first visit and checked on the server (403 = not allowed); only the name is kept in `localStorage`.
 - **Dates:** sent as `Date.toISOString()` (UTC), shown in local time via `Intl.DateTimeFormat('sk-SK')`.

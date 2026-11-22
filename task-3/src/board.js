@@ -23,6 +23,12 @@ export const board = reactive({
         peekId: null
 });
 
+// While the app waits for the server, every action button is disabled,
+// so two requests never overlap and an old answer cannot overwrite a newer one
+export function waiting() {
+        return board.busy || board.loading;
+}
+
 // Student
 
 // The name is checked on the server first, so a name that is not allowed is never saved
@@ -55,14 +61,21 @@ export async function pullTasks() {
         board.loading = false;
 }
 
-// Loads one task again (GET /api/{name}/{id}), used when its detail opens
+// Loads one task again (GET /api/{name}/{id}), used when its detail opens.
+// Skipped while another request runs: the list is read again after it anyway.
 export async function recheckTask(id) {
+        if (waiting()) {
+                return;
+        }
+        board.loading = true;
         try {
                 const fresh = await server.fetchTask(board.student, id);
                 board.tasks = board.tasks.map(function (task) {
                         return task.id === id ? fresh : task;
                 });
+                board.loading = false;
         } catch (error) {
+                board.loading = false;
                 notify(error.message, 'error');
                 await pullTasks();
         }

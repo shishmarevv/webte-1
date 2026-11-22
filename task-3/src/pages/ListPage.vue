@@ -16,7 +16,7 @@ const doneCount = computed(function () {
 
 // Lower case without diacritics, so "ulohu" also finds "Úlohu"
 function plain(text) {
-        return text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+        return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
 const visibleTasks = computed(function () {

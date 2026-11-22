@@ -1,7 +1,7 @@
 <script setup>
 import { computed, watch, onMounted } from 'vue';
 import PopupFrame from './PopupFrame.vue';
-import { board, recheckTask, flipTask, tearOff, editTask, closePeek } from '../board.js';
+import { board, waiting, recheckTask, flipTask, tearOff, editTask, closePeek } from '../board.js';
 import { humanDate, stateOf, STATE_NAMES } from '../helpers.js';
 
 const id = board.peekId;
@@ -44,13 +44,13 @@ onMounted(function () {
                         </dl>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-soft-danger me-auto" :disabled="board.busy" @click="tearOff(task)">
+                        <button type="button" class="btn btn-soft-danger me-auto" :disabled="waiting()" @click="tearOff(task)">
                                 Odstrániť
                         </button>
-                        <button type="button" class="btn btn-control" :disabled="board.busy" @click="flipTask(task)">
+                        <button type="button" class="btn btn-control" :disabled="waiting()" @click="flipTask(task)">
                                 {{ task.is_finished ? 'Otvoriť znova' : 'Dokončiť' }}
                         </button>
-                        <button type="button" class="btn btn-brand" :disabled="board.busy" @click="editTask(task)">
+                        <button type="button" class="btn btn-brand" :disabled="waiting()" @click="editTask(task)">
                                 Upraviť
                         </button>
                 </div>

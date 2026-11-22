@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { board, leave, pullTasks, wipeToSamples, draftTask } from '../board.js';
+import { board, waiting, leave, pullTasks, wipeToSamples, draftTask } from '../board.js';
 import { freshSlot } from '../helpers.js';
 
 // Slovak plural: 1 úloha, 2-4 úlohy, 0 and 5+ úloh
@@ -25,18 +25,18 @@ function startNew() {
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
                 <p class="mb-0">
                         Študent: <strong>{{ board.student }}</strong>, {{ taskCount }}
-                        <button type="button" class="btn btn-link btn-sm p-0 ms-2 align-baseline" @click="leave">
+                        <button type="button" class="btn btn-link btn-sm p-0 ms-2 align-baseline" :disabled="waiting()" @click="leave">
                                 Zmeniť študenta
                         </button>
                 </p>
                 <div class="d-flex flex-wrap gap-2">
-                        <button type="button" class="btn btn-brand" :disabled="board.busy" @click="startNew">
+                        <button type="button" class="btn btn-brand" :disabled="waiting()" @click="startNew">
                                 Nová úloha
                         </button>
-                        <button type="button" class="btn btn-control" :disabled="board.loading" @click="pullTasks">
+                        <button type="button" class="btn btn-control" :disabled="waiting()" @click="pullTasks">
                                 Načítať znova
                         </button>
-                        <button type="button" class="btn btn-soft-danger" :disabled="board.busy" @click="wipeToSamples">
+                        <button type="button" class="btn btn-soft-danger" :disabled="waiting()" @click="wipeToSamples">
                                 Obnoviť ukážkové úlohy
                         </button>
                 </div>

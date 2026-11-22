@@ -1,5 +1,5 @@
 <script setup>
-import { board, flipTask, tearOff, editTask, peek } from '../board.js';
+import { board, waiting, flipTask, tearOff, editTask, peek } from '../board.js';
 import { humanDate, stateOf, STATE_NAMES } from '../helpers.js';
 
 defineProps({
@@ -28,13 +28,13 @@ defineProps({
                         </div>
 
                         <div class="d-flex flex-wrap gap-2 flex-shrink-0">
-                                <button type="button" class="btn btn-sm btn-control" :disabled="board.busy" @click="flipTask(task)">
+                                <button type="button" class="btn btn-sm btn-control" :disabled="waiting()" @click="flipTask(task)">
                                         {{ task.is_finished ? 'Otvoriť znova' : 'Dokončiť' }}
                                 </button>
-                                <button type="button" class="btn btn-sm btn-control" :disabled="board.busy" @click="editTask(task)">
+                                <button type="button" class="btn btn-sm btn-control" :disabled="waiting()" @click="editTask(task)">
                                         Upraviť
                                 </button>
-                                <button type="button" class="btn btn-sm btn-soft-danger" :disabled="board.busy" @click="tearOff(task)">
+                                <button type="button" class="btn btn-sm btn-soft-danger" :disabled="waiting()" @click="tearOff(task)">
                                         Odstrániť
                                 </button>
                         </div>
