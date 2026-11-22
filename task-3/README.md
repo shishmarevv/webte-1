@@ -32,6 +32,8 @@ npm run build    # zostavenie do priečinka dist/
 npm run preview  # lokálne spustenie zostavenej verzie
 ```
 
+Priečinok `dist/` v odovzdanom ZIP už obsahuje zostavenú verziu. Prehliadač ju nespustí priamo zo súboru (`file://`), stačí však ľubovoľný HTTP server, napríklad `cd dist && python3 -m http.server`.
+
 Na školský server sa nahráva obsah priečinka `dist/`. Cesty sú relatívne (`base: './'`), takže funguje v ľubovoľnom podpriečinku.
 
 ## Štruktúra
