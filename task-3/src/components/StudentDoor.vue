@@ -1,39 +1,34 @@
 <script setup>
 import { ref } from 'vue';
-import { signIn } from '../stores/todos.js';
-import { validateStudent, STUDENT_MAX } from '../utils/validation.js';
+import { enter } from '../board.js';
 
 const name = ref('');
-const error = ref('');
-const submitting = ref(false);
+const mistake = ref('');
+const checking = ref(false);
 
-async function submit() {
-        if (submitting.value) {
-                return;
-        }
+async function knock() {
         const value = name.value.trim();
-        error.value = validateStudent(value);
-        if (error.value) {
+        if (value === '') {
+                mistake.value = 'Zadajte identifikátor študenta.';
                 return;
         }
-
-        submitting.value = true;
+        checking.value = true;
+        mistake.value = '';
         try {
-                await signIn(value);
-        } catch (requestError) {
-                error.value = requestError.message;
-        } finally {
-                submitting.value = false;
+                await enter(value);
+        } catch (error) {
+                mistake.value = error.message;
         }
+        checking.value = false;
 }
 </script>
 
 <template>
-        <section class="row justify-content-center my-4" aria-labelledby="gate-heading">
+        <section class="row justify-content-center my-4" aria-labelledby="door-heading">
                 <div class="col-md-9 col-lg-6">
                         <div class="card">
                                 <div class="card-body p-4">
-                                        <h2 id="gate-heading" class="h4">
+                                        <h2 id="door-heading" class="h4">
                                                 Vitajte
                                         </h2>
                                         <p class="text-body-secondary">
@@ -41,7 +36,7 @@ async function submit() {
                                                 Pri prvom prihlásení server pripraví päť ukážkových úloh.
                                         </p>
 
-                                        <form novalidate @submit.prevent="submit">
+                                        <form novalidate @submit.prevent="knock">
                                                 <label for="student-name" class="form-label">
                                                         Identifikátor študenta
                                                 </label>
@@ -50,20 +45,18 @@ async function submit() {
                                                         v-model="name"
                                                         type="text"
                                                         class="form-control"
-                                                        :class="{ 'is-invalid': error }"
-                                                        :maxlength="STUDENT_MAX"
+                                                        :class="{ 'is-invalid': mistake }"
+                                                        maxlength="100"
                                                         autocomplete="username"
                                                         placeholder="napr. xpriezvisko"
-                                                        aria-describedby="student-error"
-                                                        :aria-invalid="error !== ''"
                                                 >
-                                                <p id="student-error" class="invalid-feedback mb-0">
-                                                        {{ error }}
+                                                <p class="invalid-feedback mb-0">
+                                                        {{ mistake }}
                                                 </p>
 
-                                                <button type="submit" class="btn btn-brand mt-3" :disabled="submitting">
-                                                        <span v-if="submitting" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                                                        {{ submitting ? 'Overujem na serveri…' : 'Pokračovať' }}
+                                                <button type="submit" class="btn btn-brand mt-3" :disabled="checking">
+                                                        <span v-if="checking" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                                                        {{ checking ? 'Overujem na serveri…' : 'Pokračovať' }}
                                                 </button>
                                         </form>
                                 </div>

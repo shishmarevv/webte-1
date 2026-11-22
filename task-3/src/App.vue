@@ -1,51 +1,38 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import AppHeader from './components/AppHeader.vue';
-import AppFooter from './components/AppFooter.vue';
-import StudentGate from './components/StudentGate.vue';
-import TodoFormModal from './components/TodoFormModal.vue';
-import TodoDetailModal from './components/TodoDetailModal.vue';
-import ConfirmDialog from './components/ConfirmDialog.vue';
-import ToastStack from './components/ToastStack.vue';
-import { todoStore, loadTodos } from './stores/todos.js';
-import { uiStore } from './stores/ui.js';
+import TopBar from './components/TopBar.vue';
+import FooterNote from './components/FooterNote.vue';
+import StudentDoor from './components/StudentDoor.vue';
+import TaskEditor from './components/TaskEditor.vue';
+import TaskPeek from './components/TaskPeek.vue';
+import QuestionPopup from './components/QuestionPopup.vue';
+import NoticeStack from './components/NoticeStack.vue';
+import { board, pullTasks } from './board.js';
 
 const route = useRoute();
 
-// "O projekte" is readable without a student name, the task pages are not
-const needsStudent = computed(function () {
-        return !todoStore.student && route.path !== '/o-projekte';
-});
-
 onMounted(function () {
-        if (todoStore.student) {
-                loadTodos();
+        if (board.student) {
+                pullTasks();
         }
 });
-
-// A normal #main-content link would change the router's hash, so focus the element directly
-function skipToContent() {
-        document.getElementById('main-content').focus();
-}
 </script>
 
 <template>
-        <a class="visually-hidden-focusable p-2" href="#main-content" @click.prevent="skipToContent">
-                Preskočiť na obsah
-        </a>
+        <TopBar />
 
-        <AppHeader />
-
-        <main id="main-content" class="container-xxl flex-grow-1 py-3" tabindex="-1">
-                <StudentGate v-if="needsStudent" />
+        <main class="container-xxl flex-grow-1 py-3">
+                <!-- Without a student name only "O projekte" can be opened -->
+                <StudentDoor v-if="!board.student && route.path !== '/o-projekte'" />
                 <RouterView v-else />
         </main>
 
-        <AppFooter />
+        <FooterNote />
 
-        <TodoFormModal v-if="uiStore.form" />
-        <TodoDetailModal v-if="uiStore.detailId !== null" />
-        <ConfirmDialog v-if="uiStore.confirm" />
-        <ToastStack />
+        <!-- Dialogs are shown by setting board.editor / board.peekId / board.question -->
+        <TaskEditor v-if="board.editor" />
+        <TaskPeek v-if="board.peekId !== null" />
+        <QuestionPopup v-if="board.question" />
+        <NoticeStack />
 </template>

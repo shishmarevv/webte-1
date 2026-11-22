@@ -4,7 +4,7 @@
                         Viktor Shishmarev, WEBTE1, ZS 2026/2027
                 </p>
                 <p class="mb-0">
-                        Vue 3, Vue Router, FullCalendar 6, Bootstrap 5. Písmo: JetBrains Mono.
+                        Vue 3, Vue Router, FullCalendar 6, Axios, Bootstrap 5. Písmo: JetBrains Mono.
                         <RouterLink to="/o-projekte">Viac o projekte</RouterLink>
                 </p>
         </footer>

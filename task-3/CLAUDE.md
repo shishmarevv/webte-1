@@ -51,7 +51,7 @@ Base `https://wt1zadanie.iolab.sk`, OpenAPI at `/docs` and `/openapi.json`. CORS
 
 ## Style carried over from task 1 and 2 (`../task-2/css/styles.css`)
 
-- **Font:** JetBrains Mono (400, 600, 700), local `.woff2` in `src/assets/fonts/` (bundled by Vite through `styles.css`), OFL 1.1 license in `src/assets/fonts/OFL.txt`.
+- **Font:** JetBrains Mono (400, 700; 600 was dropped, the browser uses 700), local `.woff2` in `src/assets/fonts/` (bundled by Vite through `styles.css`), OFL 1.1 license in `src/assets/fonts/OFL.txt`.
 - **Color tokens** on `:root`, dark mode via `@media screen and (prefers-color-scheme: dark)`, `color-scheme: light dark`:
 
   | token | light | dark |
@@ -66,25 +66,49 @@ Base `https://wt1zadanie.iolab.sk`, OpenAPI at `/docs` and `/openapi.json`. CORS
   | `--color-link` | `#2F5D3A` | `#A9CCA0` |
   | `--color-accent` | `#9A3B55` | `#F0B3C1` |
 
-- `--radius: 3px`. Bootstrap themed through its `--bs-*` variables mapped to our tokens (same mapping as task 2), FullCalendar through its `--fc-*` variables.
-- Active nav item / pressed toggle = `--color-brand-green` background, `aria-current="page"` / `aria-pressed="true"` as styling hooks. `.btn-control` button theme from task 2.
-- Focus ring in `--color-accent`, skip link "Preskočiť na obsah", navbar toggler below 768px, hover styles under `@media (any-hover: hover)`.
+- Radius 3px (`--bs-border-radius*`). Bootstrap themed through its `--bs-*` variables mapped to our tokens (same mapping as task 2), FullCalendar through its `--fc-*` variables.
+- Active nav item / pressed toggle = `--color-brand-green` background, `aria-current="page"` / `aria-pressed="true"` as styling hooks. Three button styles: `.btn-control` (neutral, from task 2), `.btn-brand` (main action), `.btn-soft-danger` (delete/reset); hover/pressed/disabled reuse the normal colours.
+- One focus style (3px `--color-accent` outline) for everything, navbar toggler below 768px. Dropped on purpose to keep task 3 simple: skip link (it fought the hash router), `any-hover` media query.
 - Favicon: the "BШ" monogram (`favicon.svg` + `favicon.ico`), also used as the navbar brand icon.
 - Footer: "Viktor Shishmarev, WEBTE1, ZS 2026/2027" + used libraries.
 - Code style: 8-space indentation, English comments only where the reason is not obvious, Slovak UI text. No emojis anywhere.
 
 ## Decisions
 
+- **Simplicity first:** the user found task 2 over-engineered. Prefer fewer files and fewer special cases; a component used once lives inside its page. Do not add features the PDF does not ask for.
 - **Framework:** Vue 3, Composition API with `<script setup>` single-file components.
-- **Build:** Node + Vite (`npm install`, `npm run dev`, `npm run build`). `base: './'` so `dist/` works in any folder on the school server. Node installed by the user (nvm), `node_modules/` and `dist/` are not committed.
+- **Build:** Node + Vite (`npm install`, `npm run dev`, `npm run build`). `base: './'` so `dist/` works in any folder on the school server. Node 22 from apt; `node_modules/` and `dist/` are not committed.
+- **HTTP:** Axios (allowed by the PDF next to Fetch), pinned to exactly `1.21.0` (axios had a supply-chain incident in 2026, so no floating range). jQuery / `$.ajax` was requested and rejected: the PDF allows only Fetch or Axios, and jQuery next to Vue fights over the DOM.
 - **Navigation:** vue-router with hash history (`#/kalendar`, `#/zoznam`, `#/o-projekte`), so the static school server needs no rewrites. Each route sets `document.title`.
-- **CSS:** Bootstrap 5 CSS only. Modals, navbar collapse and toasts are driven by Vue state, not by `bootstrap.bundle.js`, so two systems never fight over the DOM.
-- **Calendar:** FullCalendar (`@fullcalendar/vue3` + daygrid, timegrid, interaction), Slovak locale, week starts Monday.
-- **State:** plain `reactive()` stores in `src/stores/` (no Pinia). One `todos` array is the single source of truth; calendar events and the list are `computed` from it. The store changes only after a successful server response.
-- **Student name:** asked on first visit, only the name is kept in `localStorage`; header shows it with a "Zmeniť" button.
+- **CSS:** Bootstrap 5 CSS only. Dialogs, navbar collapse and toasts are driven by Vue state, not by `bootstrap.bundle.js`.
+- **Calendar:** FullCalendar (`@fullcalendar/vue3` + daygrid, timegrid, interaction), Slovak locale (week starts Monday).
+- **State:** one plain `reactive()` object `board` in `src/board.js` (no Pinia) holds the student, tasks, loading/busy flags, notices and which dialog is open. Calendar events and the list are both computed from `board.tasks`.
+- **Server is the truth:** every change goes through `change()` in `board.js`: send the request, show a notice, then read the whole list again (`pullTasks`). No local patching of the array, so the list, the calendar and the server can never disagree (this also covers the 50-task reset and tasks deleted elsewhere). One `board.busy` flag disables all action buttons while a change runs.
+- **GET one task** (`/api/{name}/{id}`) is used when the task detail opens (`recheckTask`).
+- **Student name:** asked on first visit and checked on the server (403 = not allowed); only the name is kept in `localStorage`.
 - **Dates:** sent as `Date.toISOString()` (UTC), shown in local time via `Intl.DateTimeFormat('sk-SK')`.
-- **Form:** one modal for create and edit; errors at fields; submit disabled with spinner while sending; stays open with data after a failure.
-- **Feedback:** toasts for success/error, confirm dialog component for delete and reset.
+- **Form:** one dialog for create and edit; client checks (title required, start <= end) shown at the fields, length limits via `maxlength`; stays open with the typed data after a failure.
+
+## Naming vocabulary
+
+The user wants the code to read as their own, not as generic tutorial code. Keep using this vocabulary for new code:
+
+| idea | name |
+|---|---|
+| app state | `board` (`src/board.js`) |
+| REST module / request helper | `server.js` / `callServer()`, error text `explain()` |
+| load list / one task | `pullTasks()` / `recheckTask(id)` |
+| create / edit / toggle / delete / reset | `pinTask` / `rewriteTask` / `flipTask` / `tearOff` / `wipeToSamples` |
+| toast | `notify()` / `dismiss()`, list `board.notices`, component `NoticeStack` |
+| confirm dialog | `askFirst()` / `answer()`, `board.question`, `QuestionPopup` |
+| dialog shell | `PopupFrame` |
+| task form | `TaskEditor`, `draftTask()` (new) / `editTask()`, form data `draft`, errors `mistakes`, check `checkTask()` |
+| task detail | `TaskPeek`, `peek(id)` / `closePeek()`, `board.peekId` |
+| list item | `TaskCard` |
+| login screen | `StudentDoor`, `enter()` / `leave()` |
+| bar above calendar and list | `BoardBar` |
+| task state | `stateOf(task)` -> `open` / `late` / `done`, CSS `state-*`, labels `STATE_NAMES` |
+| date helpers | `humanDate()`, `forInput()`, `fromInput()`, `freshSlot()` |
 
 ## File structure
 
@@ -92,24 +116,19 @@ Base `https://wt1zadanie.iolab.sk`, OpenAPI at `/docs` and `/openapi.json`. CORS
 task-3/
 ├── index.html            Vite entry, lang="sk", favicon
 ├── README.md             author, school server link, technologies, install/run, licenses, AI use
-├── package.json          vite config + dependencies
-├── vite.config.js
+├── package.json          dependencies (axios pinned exactly)
+├── vite.config.js        base './'
 ├── public/               favicon.svg/.ico (copied as-is)
 └── src/
-    ├── assets/fonts/     JetBrains Mono + OFL.txt
+    ├── assets/fonts/     JetBrains Mono Regular + Bold, OFL.txt
     ├── main.js           createApp, router, global CSS
     ├── router.js         hash routes + page titles
-    ├── styles.css        tokens, --bs-* and --fc-* mapping, own components
+    ├── styles.css        tokens, --bs-* / --fc-* mapping, buttons, task state colours
     ├── App.vue           layout + global dialogs
-    ├── services/api.js   all REST calls, ApiError with Slovak messages
-    ├── stores/todos.js   student, todos, loading/error, CRUD actions
-    ├── stores/ui.js      toasts, confirm dialog, form/detail modal state
-    ├── stores/actions.js toggle / delete / reset with confirm + toast (shared by list, detail, toolbar)
-    ├── utils/dates.js    ISO <-> datetime-local, display format, overdue, state class/label
-    ├── utils/validation.js  validateTodo(form) -> { field: message }, validateStudent
-    ├── utils/todoFilters.js filterTodos (state + diacritics-insensitive search), sortTodos
-    ├── views/            CalendarView, ListView, AboutView
-    └── components/       BaseModal (Bootstrap modal markup driven by v-if), AppHeader, AppFooter,
-                          StudentGate, StudentBar, LoadStatus, TodoCalendar, TodoToolbar, TodoItem,
-                          TodoFormModal, TodoDetailModal, ConfirmDialog, ToastStack
+    ├── server.js         all REST calls (axios), Slovak error messages
+    ├── board.js          app state + every user action
+    ├── helpers.js        dates, task state, form check
+    ├── pages/            CalendarPage (FullCalendar), ListPage (filters + list), AboutPage
+    └── components/       TopBar, FooterNote, StudentDoor, BoardBar, TaskCard, TaskEditor, TaskPeek,
+                          PopupFrame, QuestionPopup, NoticeStack
 ```

@@ -40,7 +40,7 @@
                                 <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a>: vývojový server a zostavenie aplikácie.
                         </li>
                         <li>
-                                Fetch API: komunikácia so serverom.
+                                <a href="https://axios-http.com/" target="_blank" rel="noopener">Axios</a>: HTTP požiadavky na REST API (posiela a prijíma JSON, chyby servera vracia ako výnimky).
                         </li>
                         <li>
                                 Písmo <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a> (SIL Open Font License 1.1).

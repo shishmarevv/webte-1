@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import CalendarView from './views/CalendarView.vue';
-import ListView from './views/ListView.vue';
-import AboutView from './views/AboutView.vue';
+import CalendarPage from './pages/CalendarPage.vue';
+import ListPage from './pages/ListPage.vue';
+import AboutPage from './pages/AboutPage.vue';
 
 const routes = [
         { path: '/', redirect: '/kalendar' },
-        { path: '/kalendar', component: CalendarView, meta: { title: 'Kalendár' } },
-        { path: '/zoznam', component: ListView, meta: { title: 'Zoznam úloh' } },
-        { path: '/o-projekte', component: AboutView, meta: { title: 'O projekte' } },
+        { path: '/kalendar', component: CalendarPage, meta: { title: 'Kalendár' } },
+        { path: '/zoznam', component: ListPage, meta: { title: 'Zoznam úloh' } },
+        { path: '/o-projekte', component: AboutPage, meta: { title: 'O projekte' } },
         { path: '/:pathMatch(.*)*', redirect: '/kalendar' }
 ];
 

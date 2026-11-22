@@ -19,11 +19,11 @@ V prehliadači (`localStorage`) sa pamätá iba identifikátor študenta. Aplik�
 - [FullCalendar 6](https://fullcalendar.io/) (`@fullcalendar/vue3`, pluginy daygrid, timegrid, interaction)
 - [Bootstrap 5](https://getbootstrap.com/), iba CSS; dialógy a menu ovláda Vue
 - [Vite](https://vite.dev/) ako vývojový server a nástroj na zostavenie
-- Fetch API na komunikáciu so serverom
+- [Axios](https://axios-http.com/) na komunikáciu so serverom (REST API, JSON)
 
 ## Inštalácia a spustenie
 
-Potrebný je [Node.js](https://nodejs.org/) 20.19+ alebo 22.12+ (testované na 26 LTS).
+Potrebný je [Node.js](https://nodejs.org/) 20.19+ alebo 22.12+ (testované na 22).
 
 ```
 npm install      # inštalácia závislostí
@@ -39,16 +39,16 @@ Na školský server sa nahráva obsah priečinka `dist/`. Cesty sú relatívne (
 ```
 src/
 ├── main.js, App.vue, router.js, styles.css
-├── services/api.js     všetky požiadavky na REST API
-├── stores/             reaktívny stav: úlohy (todos.js), dialógy a správy (ui.js), spoločné akcie (actions.js)
-├── utils/              dátumy, validácia formulára, filtrovanie a zoradenie
-├── views/              Kalendár, Zoznam úloh, O projekte
-└── components/         hlavička, pätička, kalendár, položka zoznamu, formulár, dialógy, správy
+├── server.js       všetky požiadavky na REST API (Axios)
+├── board.js        stav aplikácie a všetky akcie používateľa
+├── helpers.js      dátumy, stav úlohy, kontrola formulára
+├── pages/          Kalendár, Zoznam úloh, O projekte
+└── components/     hlavička, pätička, prihlásenie, panel, položka zoznamu, formulár, detail, dialógy, správy
 ```
 
 ## Zdroje a licencie
 
-- Vue, Vue Router, Vite, Bootstrap, FullCalendar (štandardné pluginy): MIT License, texty licencií v `node_modules/` po inštalácii.
+- Vue, Vue Router, Vite, Bootstrap, FullCalendar (štandardné pluginy), Axios: MIT License, texty licencií v `node_modules/` po inštalácii.
 - Písmo [JetBrains Mono](https://www.jetbrains.com/lp/mono/): SIL Open Font License 1.1, text licencie v `src/assets/fonts/OFL.txt`.
 - Obrázok `favicon.ico`/`favicon.svg`: vygenerovaný pomocou Claude.
 - Ikona menu: [SVG Repo](https://www.svgrepo.com/svg/511068/menu-alt-05).
