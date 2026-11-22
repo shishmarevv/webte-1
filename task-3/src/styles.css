@@ -1,0 +1,270 @@
+/* Colours shared with task 1 and 2 */
+:root {
+        --color-background: #FAF6EE;
+        --color-surface: #F0E9DA;
+        --color-brand-green: #B9D3B0;
+        --color-brand-pink: #F3CCD3;
+        --color-brand-pink-strong: #E7AEBB;
+        --color-text: #2B2A27;
+        --color-muted-text: #5E5A52;
+        --color-link: #2F5D3A;
+        --color-accent: #9A3B55;
+
+        /* Bootstrap reads these variables, so its components use our colours (also in dark mode) */
+        --bs-body-bg: var(--color-background);
+        --bs-body-color: var(--color-text);
+        --bs-body-font-family: 'JetBrains Mono', monospace;
+        --bs-body-line-height: 1.6;
+        --bs-secondary-color: var(--color-muted-text);
+        --bs-border-color: var(--color-brand-green);
+        --bs-border-color-translucent: var(--color-brand-green);
+        --bs-border-radius: 3px;
+        --bs-border-radius-sm: 3px;
+        --bs-border-radius-lg: 3px;
+        --bs-link-color: var(--color-link);
+        --bs-link-hover-color: var(--color-link);
+        --bs-code-color: var(--color-accent);
+        --bs-warning-bg-subtle: var(--color-brand-pink);
+        --bs-warning-border-subtle: var(--color-brand-pink-strong);
+        --bs-warning-text-emphasis: var(--color-text);
+        --bs-form-invalid-color: var(--color-accent);
+        --bs-form-invalid-border-color: var(--color-accent);
+
+        color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+        :root {
+                --color-background: #1B1E1A;
+                --color-surface: #252A24;
+                --color-brand-green: #3E5A40;
+                --color-brand-pink: #5A3440;
+                --color-brand-pink-strong: #74404F;
+                --color-text: #EFE9DC;
+                --color-muted-text: #B8B1A3;
+                --color-link: #A9CCA0;
+                --color-accent: #F0B3C1;
+        }
+
+        /* Bootstrap draws these two icons in black, so they need a light version */
+        .btn-close {
+                filter: invert(1);
+        }
+
+        .form-select {
+                --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23EFE9DC' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        }
+}
+
+@font-face {
+        font-family: 'JetBrains Mono';
+        src: url('./assets/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+}
+
+@font-face {
+        font-family: 'JetBrains Mono';
+        src: url('./assets/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-display: swap;
+}
+
+a {
+        color: var(--color-link);
+}
+
+h1, h2, h3 {
+        font-weight: 700;
+}
+
+/* One focus style everywhere instead of Bootstrap's blue glow */
+:focus-visible, .form-control:focus, .form-select:focus, .form-check-input:focus {
+        outline: 3px solid var(--color-accent);
+        border-color: var(--color-accent);
+        box-shadow: none;
+}
+
+.form-check-input:checked {
+        background-color: var(--color-link);
+        border-color: var(--color-link);
+}
+
+/* Bootstrap components */
+
+.navbar {
+        --bs-navbar-brand-color: var(--color-link);
+        --bs-navbar-brand-hover-color: var(--color-link);
+        --bs-navbar-color: var(--color-link);
+        --bs-navbar-hover-color: var(--color-link);
+        --bs-navbar-active-color: var(--color-text);
+        --bs-navbar-toggler-border-color: var(--color-muted-text);
+}
+
+.nav-pills {
+        --bs-nav-pills-link-active-bg: var(--color-brand-green);
+        --bs-nav-pills-link-active-color: var(--color-text);
+}
+
+.toast {
+        --bs-toast-bg: var(--color-surface);
+        border-left: 6px solid var(--color-brand-green);
+}
+
+.toast.notice-error {
+        border-left-color: var(--color-accent);
+}
+
+/* Reserved height for the spinner line, also when it is empty */
+.status-line {
+        min-height: 1.5rem;
+}
+
+/* Each open dialog darkens what is under it, also a question over the task detail */
+.popup-dim {
+        background-color: rgb(0 0 0 / 0.5);
+}
+
+/* Buttons. Bootstrap colours a .btn through its --bs-btn-* variables.
+   Our three styles set the normal colours; hover, pressed and disabled reuse them. */
+
+.btn-control, .btn-brand, .btn-soft-danger {
+        --bs-btn-hover-color: var(--bs-btn-color);
+        --bs-btn-hover-border-color: var(--bs-btn-border-color);
+        --bs-btn-active-color: var(--bs-btn-color);
+        --bs-btn-active-border-color: var(--bs-btn-border-color);
+        --bs-btn-disabled-color: var(--bs-btn-color);
+        --bs-btn-disabled-bg: var(--bs-btn-bg);
+        --bs-btn-disabled-border-color: var(--bs-btn-border-color);
+}
+
+/* Neutral: filters and secondary actions */
+.btn-control {
+        --bs-btn-color: var(--color-text);
+        --bs-btn-bg: var(--color-background);
+        --bs-btn-border-color: var(--color-brand-green);
+        --bs-btn-hover-bg: var(--color-surface);
+        --bs-btn-active-bg: var(--color-brand-green);
+}
+
+/* A pressed filter button */
+.btn-control[aria-pressed="true"] {
+        --bs-btn-bg: var(--color-brand-green);
+        --bs-btn-hover-bg: var(--color-brand-green);
+        font-weight: 700;
+}
+
+/* Main action: create, save */
+.btn-brand {
+        --bs-btn-color: var(--color-background);
+        --bs-btn-bg: var(--color-link);
+        --bs-btn-border-color: var(--color-link);
+        --bs-btn-hover-bg: var(--color-link);
+        --bs-btn-active-bg: var(--color-link);
+        font-weight: 700;
+}
+
+/* Destructive action: delete, reset */
+.btn-soft-danger {
+        --bs-btn-color: var(--color-accent);
+        --bs-btn-bg: var(--color-background);
+        --bs-btn-border-color: var(--color-brand-pink-strong);
+        --bs-btn-hover-bg: var(--color-brand-pink);
+        --bs-btn-active-bg: var(--color-brand-pink);
+}
+
+/* Task state. One pair of colours per state, used by the list, the badges, the legend and the calendar */
+
+.state-open {
+        --state-bg: var(--color-brand-green);
+        --state-border: var(--color-link);
+}
+
+.state-late {
+        --state-bg: var(--color-brand-pink);
+        --state-border: var(--color-accent);
+}
+
+.state-done {
+        --state-bg: var(--color-surface);
+        --state-border: var(--color-muted-text);
+}
+
+.state-badge {
+        color: var(--color-text);
+        background-color: var(--state-bg);
+        border: 1px solid var(--state-border);
+}
+
+.task-card {
+        border-left: 6px solid var(--state-border);
+}
+
+.task-card.state-done .task-title {
+        text-decoration: line-through;
+        color: var(--color-muted-text);
+}
+
+/* Keep the line breaks the user typed into the description */
+.keep-lines {
+        white-space: pre-wrap;
+}
+
+.swatch {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        vertical-align: -0.15rem;
+        background-color: var(--state-bg);
+        border: 2px solid var(--state-border);
+}
+
+/* FullCalendar reads its colours from --fc-* variables */
+
+.fc {
+        --fc-border-color: var(--color-brand-green);
+        --fc-page-bg-color: var(--color-background);
+        --fc-neutral-bg-color: var(--color-surface);
+        --fc-today-bg-color: var(--color-surface);
+        --fc-highlight-color: var(--color-brand-green);
+        --fc-now-indicator-color: var(--color-accent);
+        --fc-button-text-color: var(--color-text);
+        --fc-button-bg-color: var(--color-background);
+        --fc-button-border-color: var(--color-brand-green);
+        --fc-button-hover-bg-color: var(--color-surface);
+        --fc-button-hover-border-color: var(--color-brand-green);
+        --fc-button-active-bg-color: var(--color-brand-green);
+        --fc-button-active-border-color: var(--color-brand-green);
+}
+
+/* The toolbar wraps on a phone instead of overflowing */
+.fc .fc-toolbar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+}
+
+.fc .fc-toolbar-title {
+        font-size: 1.2rem;
+}
+
+/* Day names and numbers are links inside FullCalendar, they should look like text */
+.fc a {
+        color: inherit;
+        text-decoration: none;
+}
+
+/* The event's state class gives FullCalendar its colours */
+.fc .fc-event {
+        --fc-event-bg-color: var(--state-bg);
+        --fc-event-border-color: var(--state-border);
+        --fc-event-text-color: var(--color-text);
+        cursor: pointer;
+}
+
+.fc .state-done .fc-event-title {
+        text-decoration: line-through;
+}
+
+.fc .state-done .fc-event-title::before {
+        content: "\2713  ";
+}
